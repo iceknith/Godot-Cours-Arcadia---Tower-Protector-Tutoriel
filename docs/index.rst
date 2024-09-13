@@ -21,6 +21,6 @@ Contents
 .. toctree::
 
    Home <self>
-   usage
-   api
-   test
+   Découverte de Godot:
+      installation-godot.rst
+      creation-projet.rst
