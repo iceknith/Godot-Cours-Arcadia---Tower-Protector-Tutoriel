@@ -1,3 +1,2 @@
-mkdocs
-mkdocstrings[python]
-markdown-include
+Sphinx>=5,<6
+sphinx_rtd_theme
