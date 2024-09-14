@@ -3,9 +3,6 @@
 .. :image:: img/preview.gif
    :alt: -2-
 
-Check out the :doc:`usage` section for further information, including
-how to :ref:`installation` the project.
-
 .. note::
 
    Ce projet est en plein développement
