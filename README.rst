@@ -8,5 +8,5 @@ Si c’est le cas, n’attend plus, car c’est exactement ce que propose Godot 
 Dans ce court tutoriel, tu apprendra comment utiliser Godot, tout en faisant un petit jeu 2D:
 
 .. image:: docs/img/preview.gif
-   :alt: .. image:: img/preview.gif
-         :alt: double-erreur
+   :alt: -1-
+
