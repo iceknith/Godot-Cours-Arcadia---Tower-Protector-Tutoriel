@@ -1,6 +1,10 @@
 Découverte de Godot
 =========
 
+Dans cette partie du tutoriel, nous installeront godot, et nous mettrons tout en place pour le développement de ce tutoriel.
+
+.. installation-godot:
+
 Installation de Godot
 ------------
 
@@ -56,9 +60,7 @@ Après avoir crée le projet, il nous faut installer les différents `assets`
    `asset` est le nom donné aux éléments non-code d'un jeu vidéo, par exemple, une texture, un font ou une musique.
 
 Pour celà, téléchargez le fichier :download:`ici <ressources/Godot-Cours-Arcadia---Tower-Protector--- Assets.zip>`, extrayez le fichier ``assets`` et mettez-le dans le dossier de votre projet:
+
 .. image:: img/filesAsset.png
 
 Une fois cette étape terminée, nous pouvons commencer à créer notre premier jeu !
-
-
-heyyy
