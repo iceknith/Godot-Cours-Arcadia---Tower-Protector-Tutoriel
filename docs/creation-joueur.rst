@@ -23,7 +23,7 @@ Vous pouvez créer un dossier ``scenes`` dans votre projet, et y enregistrer la 
 .. image:: img/characterbody2dwarning.png
 
 .. warning::
-   * *"Ce nœud n'a pas de forme, il ne peut donc pas entrer en collision ou interagir avec d'autres objets.
+   *  *"Ce nœud n'a pas de forme, il ne peut donc pas entrer en collision ou interagir avec d'autres objets.
       Envisagez d'ajouter un* ``CollisionShape2D`` *ou un* ``CollisionPolygon2D`` *en tant qu'enfant pour définir sa forme."*
 
 Qu'il en soit ainsi, ajoutons un ``CollisionShape2D`` en cliquant sur l'icône **+** en haut à gauche, en appuyant sur ``Ctrl+A`` ou encore en faisant: **Clic-droit -> Ajouter un nœud** sur le ``CharacterBody2D``.
