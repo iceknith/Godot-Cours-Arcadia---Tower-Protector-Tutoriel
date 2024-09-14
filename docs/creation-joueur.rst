@@ -60,4 +60,5 @@ Renommez-la ``"idle"``.
    Généralement, elle représente le personnage qui respire, pour ajouter du mouvement à l'image et pour faire vivre le jeu.
    Dans certains jeux, si vous attendez suffisamment longtemps, des animations spéciales vont se jouer: le personnage qui se gratte la tête, ou qui s'asseoit par terre ou s'endort...
 
-Cliquez ensuite sur l'icône de grille [À suivre]
+Cliquez ensuite sur l'icône de grille: `Add frames from sprite sheet`, et ouvrez le fichier ``assets/player.png``.
+Celà vous ouvrira une grande

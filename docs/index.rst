@@ -1,6 +1,6 @@
 .. include:: ../README.rst
 
-.. :image:: img/preview.gif
+.. image:: img/preview.gif
    :alt: -2-
 
 .. note::
