@@ -36,13 +36,13 @@ Cette fenêtre s'appelle le `Project Manager`. C'est ici que vous trouverez vos 
 Actuellement, le `Project Manager` est vide, donc créons notre premier projet.
 
 .. note::
-   Pour ce tutoriel, certaines screenshots et termes que nous utiliserons seront en anglais.
+   Pour ce tutoriel, certains termes et screenshots que nous utiliserons seront en anglais.
    C'est généralement un meilleur choix de tout mettre en anglais lorsque l'on programme, et la documentation sur internet est plus fournie en anglais qu'en français.
    Libre à vous de mettre votre éditeur dans la langue de votre choix, mais il se peut que certains boutons n'aient pas les mêmes libellés chez vous.
    Vous pouvez changer la langue de l'éditeur dans les `Paramètres` en haut à droite du `Project Manager`, ou dans `Editor Settings` dans l'éditeur.
 
 Cliquer sur le bouton **Create** en haut à gauche pour créer un nouveau projet.
-Un popup s’ouvrira, en vous demandant des informations sur votre projet. Nommez votre projet ``Tuto Arcadia`` **[1]**, et choisissez le fichier dans lequel vous voulez qu’il soit stocké **[2]**.
+Un popup s’ouvrira, en vous demandant des informations sur votre projet. Nommez votre projet ``"Tuto Arcadia"`` **[1]**, et choisissez le fichier dans lequel vous voulez qu’il soit stocké **[2]**.
 
 .. image:: img/newproject.png
 
@@ -54,23 +54,33 @@ L'éditeur
 
 Dans cette sous-partie, nous allons décrire les différents éléments qui composent l'éditeur:
 
-[note: changer l'image pour inclure les nouveaux numéros]
+.. image:: img/fulleditor.png
 
-.. image:: img/editor.png
-
-1. Au milieu, vous trouverez la fenêtre principale de l'éditeur, celle-ci vous permettera de visionner, et de modifier les différentes scènes de votre projet.
-2. En bas à gauche, vous trouverez l'*Arborescence du projet*. Il s'agit en réalité du dossier que vous venez de créer en créant le projet. Vous pouvez le retrouver sur votre ordinateur en suivant le chemin de votre projet (que vous avez rempli plus tôt).
-3. Juste au dessus, en haut à gauche, on trouve l'*Arborescence des scènes*. Godot fonctionne d'une manière arborescente, c'est à dire que chaque élément, chaque personnage, etc... est un `nœud`, qui est le fils d'un autre `nœud`, et qui peut avoir des enfants. Ce fonctionnement est extrêmement puissant, et fait en sorte que, par exemple, un joueur n'est pas fonctionnellement différent d'un environnement.
-4. A droite, on peut voir l'*Inspecteur*, c'est la partie de l'éditeur qui va vous permettre de modifier les différents paramètres du `nœud` actuel. On s'en servira très souvent.
-5. En haut, vous trouverez les différents onglets. Actuellement, vous devriez être sur l'onglet *3D*, c'est celui qui est utilisé pour visualiser des scènes 3D. On ne s'en servira pas pour ce projet, qui sera entièrement en 2D (on utilisera donc l'onglet *2D*). Il y a aussi l'onglet *Script*, qui est l'endroit où on écrira tout notre code. Et l'onglet *AssetLib* qui ne nous servira pas pour l'instant mais où vous pouvez télécharger des assets que d'autres gens ont fait.
+1. Au milieu, vous trouverez la fenêtre principale de l'éditeur, celle-ci vous permettera de visionner et de modifier les différentes scènes de votre projet.
+2. En bas à gauche, vous trouverez l'*Arborescence du projet*.
+   Il s'agit en réalité du dossier que vous venez de créer en créant le projet.
+   Vous pouvez le retrouver sur votre ordinateur en suivant le chemin de votre projet (que vous avez rempli plus tôt).
+3. Juste au dessus, en haut à gauche, on trouve l'*Arborescence des scènes*. C'est là que vous pourrez modifier la `scène` en cours.
+   Chaque partie du jeu (le joueur, les ennemis, le monde) est une `scène`.
+   Une `scène` est composée d'un `nœud` racine, qui peut avoir plusieurs autres `nœuds` enfants.
+   Chaque `nœud` a un rôle particulier (un `nœud` pour la collision, un pour la texture, etc), on en apprendra plus sur ce fonctionnement en créant le joueur.
+   Une `scène` étant juste un `nœud` parent et ses enfants, il est tout à fait possible de mettre une `scène` entière en tant qu'enfant d'une autre `scène`.
+4. A droite, on peut voir l'*Inspecteur*, c'est la partie de l'éditeur qui va vous permettre de modifier les différents paramètres du `nœud` sélectionné.
+   Il est pour l'instant vide (ce qui est normal car il n'y a aucun `noeud` sélectionné), mais on s'en servira très souvent.
+5. En haut, vous trouverez les différents onglets. Actuellement, vous devriez être sur l'onglet *3D*, c'est celui qui est utilisé pour visualiser des scènes 3D.
+   On ne s'en servira pas pour ce projet, qui sera entièrement en 2D (on utilisera donc l'onglet *2D*).
+   Il y a aussi l'onglet *Script*, qui est l'endroit où on écrira tout notre code.
+   Et l'onglet *AssetLib* qui ne nous servira pas pour l'instant mais où vous pouvez télécharger des assets que d'autres gens ont fait.
+7. En haut à gauche, vous trouverez différents paramètres.
+   L'onglet le plus important est **Project -> Project Settings**, où vous pourrez modifier les différents paramètres du projet (comme la taille de la fenêtre par exemple).
 6. En haut à droite, vous trouverez différents boutons pour lancer votre projet. Voici les 3 plus importants:
 
-   * *Triangle: (Raccourci-F5):* Lancer le projet (lance le jeu depuis l'écran titre, comme le ferait un joueur).
-   * *Carré: (Raccourci-F8):* Arrêter le projet lorsqu'il est lancé (très utile!).
-   * *Clap avec un petit triangle: (Raccourci-F6):* Lancer la scène en cours, très utile lorsqu'on veut débugger une scène sans vouloir forcément recommencer tout le jeu à chaque fois pour y accéder.
+   * **Triangle** *(F5):* Lancer le projet (lance le jeu depuis l'écran titre, comme le ferait un joueur).
+   * **Carré** *(F8)*: Arrêter le projet lorsqu'il est lancé (très utile!).
+   * **Clap avec un petit triangle** *(F6)*: Lancer la scène en cours, très utile lorsqu'on veut débugger une scène sans vouloir forcément recommencer tout le jeu à chaque fois pour y accéder.
 
-7. En haut à gauche, vous trouverez différents paramètres. L'onglet le plus important est **Project -> Project Settings**, où vous pourrez modifier les différents paramètres du projet (comme la taille de la fenêtre par exemple).
-8. Et en bas, vous trouverez le reste des éditeurs. Tout ce qui n'est pas dans les autres points est en bas. Cela inclut par exemple, la fenêtre de débug, l'éditeur d'annimation, et l'éditeur de tilemaps.
+8. Et en bas, vous trouverez le reste des éditeurs. Tout ce qui n'est pas dans les autres points est en bas.
+   Cela inclut par exemple, la fenêtre de débug, l'éditeur d'animations, et l'éditeur de tilemaps. On y reviendra plus tard, notamment lorsque l'on traitera les animations du joueur.
 
 
 Importer les assets
