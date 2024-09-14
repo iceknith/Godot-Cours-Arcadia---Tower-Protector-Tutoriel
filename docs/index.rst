@@ -16,6 +16,5 @@ Contents
 .. toctree::
 
    Home <self>
-   Découverte de Godot:
-      installation-godot.rst
-      creation-projet.rst
+   Découverte de Godot <decouverte-godot>
+   Création du Joueur <creation-joueur>
