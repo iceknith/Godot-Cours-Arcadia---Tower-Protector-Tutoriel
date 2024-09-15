@@ -63,10 +63,20 @@ html_theme = "sphinx_rtd_theme"
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
-html_logo = "img/arcadia_icon.svg"
+html_logo = "img/icon.svg"
 
 html_context = {
-   "default_mode": "auto"
+   "default_mode": "dark"
+}
+
+# Theme options
+html_theme_options = {
+    # if we have a html_logo below, this shows /only/ the logo with no title text
+    "logo_only": True,
+    # Collapse navigation (False makes it tree-like)
+    "collapse_navigation": False,
+    # Hide the documentation version name/number under the logo
+    "display_version": False,
 }
 
 

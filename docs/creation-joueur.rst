@@ -164,14 +164,14 @@ Mais on peut lui assigner un type pour:
 
 Pour ce faire, il faut écrire:
 
-.. code-block:: GDScript
+.. code-block:: gdscript
 
    var nom:type = valeur
 
 Finalement, vous pouvez *"exporter"* vos variables,
 pour faire en sorte qu'elles soient modifiable depuis l'éditeur principal, en mettant un ``@export`` devant:
 
-.. code-block:: python
+.. code-block:: gdscript
 
    @export var nom:type = valeur
 
@@ -183,7 +183,7 @@ pour faire en sorte qu'elles soient modifiable depuis l'éditeur principal, en m
 
 Pour créer une fonction, il faut écrire:
 
-.. code-block:: gdscript GDScript
+.. code-block:: gdscript
 
    func nom(var1, var2, ...):
       ...
@@ -193,7 +193,7 @@ Pour créer une fonction, il faut écrire:
 Cette syntaxe est très similaire à celle de python.
 Si vous voulez spécifier les types de vos fonctions, vous pouvez faire:
 
-.. code-block:: gdscript GDScript
+.. code-block:: gdscript
 
    func nom(var1:type1, var2:type2, ...)->typeRetour:
       ...
@@ -221,7 +221,7 @@ Concrètement, pour bouger notre joueur, il nous faut plusieurs choses:
 
 Pour celà, nous pouvons utiliser le code suivant:
 
-.. code-block:: gdscript GDScript
+.. code-block:: gdscript
 
    func _physics_process(delta):
        var directionX:int = Input.get_axis("ui_left", "ui_right")
@@ -252,7 +252,7 @@ Pour tester ce code, vous pouvez appuyer sur ``F6`` (ou sur ``fn+F6``) pour fair
 
 Une fois que nous avons fait les mouvements sur une axe, il est simple de les transposer sur l'autre axe:
 
-.. code-block:: gdscript GDScript
+.. code-block:: gdscript
 
    func _physics_process(delta):
        var directionX:int = Input.get_axis("ui_left", "ui_right")
@@ -266,7 +266,7 @@ Mais pour simplifier notre code, nous n'allons pas utiliser une autre variable p
 ``directionX`` et comme ordonnée, celle de ``directionY``.
 Voici le nouveau code, pour un mouvement dans les deux axes:
 
-.. code-block:: gdscript GDScript
+.. code-block:: gdscript
 
    @export var speed:float = 300
 
@@ -294,7 +294,7 @@ Lancement de l'animation au début du jeu
 Il nous faut premièrement que l'animation du personnage se joue, dès qu'il est ajouté au jeu.
 Pour faire celà, on peut utiliser ce code:
 
-.. code-block:: gdscript GDScript
+.. code-block:: gdscript
 
    func _ready():
        $AnimatedSprite2D.play("idle")
@@ -312,7 +312,7 @@ Pour celà, on va détecter, dans ``_physics_process`` quand le joueur bouge, ou
 
 Vous pouvez alors ajouter ce bout de code à la fin de ``_physics_process``:
 
-.. code-block:: gdscript GDScript
+.. code-block:: gdscript
 
    func _physics_process(delta):
        ...
@@ -343,7 +343,7 @@ Nous allons donc tourner le sprite du joueur, selon al direction dans laquelle l
 
 Le code pour faire celà est:
 
-.. code-block:: gdscript GDScript
+.. code-block:: gdscript
 
 	   if direction.x > 0:
 		   $AnimatedSprite2D.flip_h = false
@@ -375,7 +375,7 @@ Pour celà, il existe la fonction ``.normalized()`` qui fait tout juste ça.
 
 Vous pouvez donc la rajouter à la fin de la définition de ``direction``:
 
-.. code-block:: gdscript GDScript
+.. code-block:: gdscript
 
    var direction:Vector2 = Vector2(Input.get_axis("ui_left", "ui_right"), Input.get_axis("ui_up", "ui_down")).normalized()
 
@@ -386,7 +386,7 @@ Actuellement, notre joueur atteint sa vitesse maximale instantanément, et s'arr
 Pour remédier à ce problème, nous allons utiliser une fonction, appelée la fonction ``lerp``.
 Elle s'utilise de cette façon:
 
-.. code-block:: gdscript GDScript
+.. code-block:: gdscript
 
    val = lerp(val, max_val, poid)
 
@@ -403,14 +403,14 @@ et pas du nombre de frames (car celui-ci peut varier selon les ordinateurs)
 
 On peut donc initier une variable ``acceleration`` dans le corps principal:
 
-.. code-block:: gdscript GDScript
+.. code-block:: gdscript
 
    @export var acceleration:float = 10
 
 
 Et on peut changer la ligne qui initiait ``velocity`` dans ``_physics_process(delta):``:
 
-.. code-block:: gdscript GDScript
+.. code-block:: gdscript
 
    velocity = lerp(velocity, direction * speed, acceleration * delta)
 
