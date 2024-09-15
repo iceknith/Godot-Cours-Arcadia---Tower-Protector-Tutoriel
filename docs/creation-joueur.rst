@@ -152,7 +152,7 @@ Nous allons voir ici les éléments essentiels de ce langage: les **variables** 
 
 Pour créer une variable, il faut écrire:
 
-.. code-block:: gdscript GDScript
+.. code-block:: gdscript
    var nom = valeur
 
 Une variable n'as pas de type fixé, ce qui veut dire qu'elle peut changer de type (comme en python).
@@ -163,13 +163,13 @@ Mais on peut lui assigner un type pour:
 
 Pour ce faire, il faut écrire:
 
-.. code-block:: gdscript GDScript
+.. code-block:: GDScript
    var nom:type = valeur
 
 Finalement, vous pouvez *"exporter"* vos variables,
 pour faire en sorte qu'elles soient modifiable depuis l'éditeur principal, en mettant un ``@export`` devant:
 
-.. code-block:: gdscript GDScript
+.. code-block:: python
    @export var nom:type = valeur
 
 .. warning::

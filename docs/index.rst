@@ -13,6 +13,7 @@ Contents
 --------
 
 .. toctree::
+   :maxdepth: 2
 
    Home <self>
    Découverte de Godot <decouverte-godot>
