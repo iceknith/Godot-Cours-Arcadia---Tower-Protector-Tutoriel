@@ -7,7 +7,7 @@ C'est le petit chevalier que vous pouvez voir ici:
 
 .. image:: img/playerDemo.gif
 
-.. init-joueur:
+.. _init-joueur:
 
 Initialisation du Joueur
 --------
@@ -39,7 +39,7 @@ Ajoutez une ``CapsuleShape2D`` dans l'attribut ``shape``, qui est normalement vi
 
 Vous pouvez changer sa taille avec les petits cercles oranges, mais on fera ça un tout petit peu plus tard.
 
-.. init-anims:
+.. _init-anims:
 
 Création d'animations
 --------
@@ -110,9 +110,9 @@ en sélectionnant les 6 frames suivantes (toute la deuxième ligne).
 
 Pour plus de fluidité, vous pouvez mettre les deux animations à **8 FPS** (ou ajuster la vitesse à votre préférence).
 
-Et finalement, vous pouvez ajuster la hitbox crée précédemment dans :ref:`init-joueur` à notre sprite.
+Et finalement, vous pouvez ajuster la hitbox crée :ref:`précédemment <init-joueur>` à notre sprite.
 
-.. move-init:
+.. _move-init:
 
 Création des mouvements
 --------
@@ -283,7 +283,7 @@ celui-ci n'a pas besoin d'assigner individuellement les valeurs de ``velocity.x`
 on assigne directement ``velocity``.
 De plus, dans ce code, on va mettre la vitesse maximale dans une variable, ``speed``.
 
-.. anims-fin:
+.. _anims-fin:
 
 Animation du personage
 --------
@@ -357,7 +357,7 @@ Le code pour faire cela est:
    Si dans le code précédent, vous aviez mis un ``else:`` à la place du ``elif direction.x < 0:``,
    votre joueur va se retourner à sa direction initiale, dès que vous arrêtez d'avancer.
 
-.. move-fin:
+.. _move-fin:
 
 Peaufinage des mouvements
 --------
