@@ -109,7 +109,8 @@ Renommez cette animation ``"run"``, et répétez les mêmes étapes que pour l'a
 en sélectionnant les 6 frames suivantes (toute la deuxième ligne).
 
 Pour plus de fluidité, vous pouvez mettre les deux animations à **8 FPS** (ou ajuster la vitesse à votre préférence).
-Et finalement, vous pouvez ajuster la hitbox crée précédemment: :ref: `init-joueur`
+
+Et finalement, vous pouvez ajuster la hitbox crée précédemment dans :ref:`init-joueur` à notre sprite.
 
 .. move-init:
 
