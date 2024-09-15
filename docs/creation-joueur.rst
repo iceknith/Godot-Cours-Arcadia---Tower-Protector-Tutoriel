@@ -5,7 +5,7 @@ Dans cette partie du tutoriel, nous allons créer un joueur, lui ajouter des ani
 C'est le petit chevalier que vous pouvez voir ici:
 
 
-.. image:: img/preview.gif
+.. image:: img/demoPlayer.gif
 
 .. init-joueur:
 
@@ -119,29 +119,229 @@ Actuellement nous avons un joueur, qui a des animations, mais qui ne fait pas gr
 Si vous lancez la scène avec *F6* ou en cliquant sur *l'icône de Clap avec un petit triangle* en haut à droite, vous verrez votre joueur dans un coin de l'écran qui ne peut pas se déplacer.
 Dans cette partie, nous allons lui ajouter des mouvements rudimentaires.
 
-[temp :]
+Création du script
+~~~~~~~~~~
 
-- création gdScript "vide" (pas le truc prédéfini)
-- tutoriel rapide sur la syntaxe gdscript
-- explication ``_physic_process(delta)`` (avec schéma)
-- parler de faire Input.get_axis("ui_left", "ui_right") -> velocity.x = direction * 300
-- mettre direction dans un vect2
+Pour ce faire, nous allons devoir utiliser des bouts de code.
+Premièrement, nous allons rattacher un script au Joueur, en séléctionnant le CharacterBody2D dans la hierarchie,
+et en cliquant sur le bouton en haut de la fenêtre hierarchie,
+en forme de parchemin:`Attach a new or existing script to the selected node`
+Cette popup s'ouvrira alors:
 
+.. image:: img/createplayerscript.png
+
+Il vous faudra:
+
+1. Décocher la case template
+2. Renseigner l'endroit où votre script sera stocké. Mettez-le dans un nouveau fichier, nommé ``scripts`` comme dans l'exemple.
+
+Validez, et votre éditeur changera en mode "Script" pour ouvrir le fichier crée:
+
+.. image:: img/playerEmptyScript.png
+
+Initiation à GDScript
+~~~~~~~~~~
+
+Le fichier crée est en GDScript, le langage de script utilisé par godot.
+Ce langage est très similaire à python, donc si vous avez un peu d'experience en python,
+vous devrez être plutôt à l'aise en GDScript.
+
+Nous allons voir ici les éléments essentiels de ce langage: les **variables** et les **fonctions**
+
+**Les variables :**
+
+Pour créer une variable, il faut écrire:
+
+.. code-block:: gdscript GDScript
+   var nom = valeur
+
+Une variable n'as pas de type fixé, ce qui veut dire qu'elle peut changer de type (comme en python).
+Mais on peut lui assigner un type pour:
+
+- Éviter les erreurs de type
+- Donner une indication du type de notre variable à notre éditeur, pour qu'il nous suggère des informations pertinentes
+
+Pour ce faire, il faut écrire:
+
+.. code-block:: gdscript GDScript
+   var nom:type = valeur
+
+Finalement, vous pouvez *"exporter"* vos variables,
+pour faire en sorte qu'elles soient modifiable depuis l'éditeur principal, en mettant un ``@export`` devant:
+
+.. code-block:: gdscript GDScript
+   @export var nom:type = valeur
+
+.. warning::
+   Attention, vous ne pouvez pas *exporter* des variables définies dans des fonctions
+
+
+**Les fonctions**
+
+Pour créer une fonction, il faut écrire:
+
+.. code-block:: gdscript GDScript
+   func nom(var1, var2, ...):
+      ...
+      return var3
+
+
+Cette syntaxe est très similaire à celle de python.
+Si vous voulez spécifier les types de vos fonctions, vous pouvez faire:
+
+.. code-block:: gdscript GDScript
+   func nom(var1:type1, var2:type2, ...)->typeRetour:
+      ...
+      return var3
+
+
+Vous allez parfois utiliser des fonctions prédéfinies, comme ``_ready()`` ou ``_physics_process(delta)``,
+ce sont des fonctions qui sont utilisées par godot, et qui sont appelés à des moments précis.
+Ce sont ces fonctions qui vont vous permettre de faire exécuter un bout de code, à un moment précis.
+Par exemple:
+
+- La fonction ``_ready`` est appelé dès que votre objet est ajouté dans votre jeu
+- La fonction ``_physics_process(delta)`` est appelé à fois que godot refait les calculs de physique (donc elle est appelé quasiment à chaque frame).
+  Et le delta en paramètre est le temps passé depuis le dernier appel.
+
+
+Implémentation mouvements rudimentaires
+~~~~~~~~~~
+
+Concrètement, pour bouger notre joueur, il nous faut plusieurs choses:
+
+1. Détecter à chaque update de la physique, où le joueur veut bouger
+2. Modifier la vélocité du joueur
+3. Faire bouger le joueur, et gérer les collisions avec les autres éléments
+
+Pour celà, nous pouvons utiliser le code suivant:
+
+.. code-block:: gdscript GDScript
+   func _physics_process(delta):
+       var directionX:int = Input.get_axis("ui_left", "ui_right")
+       velocity.x = directionX * 300
+       move_and_slide()
+
+Ce code est dans la fonction ``_physics_process`` et s'executera donc à chaque update du moteur physique.
+À chaque appel, nous initions une variable direction, qui va prendre comme valeur le retour de ``Input.get_axis("ui_left", "ui_right")``
+
+``Input.get_axis(input1, input2)`` est une fonction, qui va prendre deux inputs, et qui va "simuler" un joystick entre les deux, et dire où se joystick est
+Si le joystick est à gauche, donc que input1 est appuyé, la fonction renverra -1,
+si le joystick est à droite, elle renverra 1, et sinon, elle renverra 0.
+
+Ensuite, après avoir récupéré la direction du joueur sur l'axe X,
+nous allons pouvoir changer la vélocité du joueur sur l'axe X,
+en multipliant la direction par 300, 300 étant la vitesse que l'on donnera à notre joueur.
+
+Finalement, nous travaillons avec un ``CharacterBody2D``, et donc nous avons accès à la fonction ``move_and_slide()``,
+qui va automatiquement faire bouger le joueur, et gérer ses collisions.
+
+Pour tester ce code, vous pouvez appuyer sur ``F6`` (ou sur ``fn+F6``) pour faire tourner la scène actuelle.
+
+.. hint:: Exercice:
+   Maintenant que vous savez faire bouger le joueur sur l'axe X, essayez (sans regarder la suite) de le faire bouger
+   sur l'ase Y.
+   Indice: les inputs pour le haut et le bas sont respectivement ``"ui_up"`` et ``"ui_down"``
+
+
+Une fois que nous avons fait les mouvements sur une axe, il est simple de les transposer sur l'autre axe:
+
+.. code-block:: gdscript GDScript
+   func _physics_process(delta):
+       var directionX:int = Input.get_axis("ui_left", "ui_right")
+       var directionY:int = Input.get_axis("ui_up", "ui_down")
+       velocity.x = directionX * 300
+       velocity.y = directionY * 300
+       move_and_slide()
+
+Mais pour simplifier notre code, nous n'allons pas utiliser une autre variable pour l'axe Y.
+À la place, nous allons créer une variable ``direction`` qui sera un ``Vector2``, qui aura comme abscisse la valeur de
+``directionX`` et comme ordonnée, celle de ``directionY``.
+Voici le nouveau code, pour un mouvement dans les deux axes:
+
+.. code-block:: gdscript GDScript
+   @export var speed:float = 300
+
+   func _physics_process(delta):
+       var direction:Vector2 = Vector2(Input.get_axis("ui_left", "ui_right"), Input.get_axis("ui_up", "ui_down"))
+       velocity = direction * speed
+       move_and_slide()
+
+Ce code fonctionne exactement de la même manière que le code précédent, mais à l'exception du précédent,
+celui-ci n'a pas besoin d'assigner individuellement les valeurs de ``velocity.x`` et ``velocity.y``,
+on assigne directement ``velocity``.
+De plus, dans ce code, on va mettre la vitesse maximale dans une variable, ``speed``.
 
 .. anims-fin:
 
 Animation du personage
 --------
 
-Actuellement, notre personage bouge, mais il reste toujours dans le même animation,
-alors qu'on veut qu'il change d'animation dynamiquement
+Actuellement, notre personage bouge, mais il reste toujours statiquement dans la même frame de la même animation.
+Il est temp de changer ça !
 
-[temp:]
+Lancement de l'animation au début du jeu
+~~~~~~~~~~
 
-- lancement de l'animation par défaut
-- changement de l'animation selon si on avance ou pas
-- changement de l'orientation de l'animation
+Il nous faut premièrement que l'animation du personnage se joue, dès qu'il est ajouté au jeu.
+Pour faire celà, on peut utiliser ce code:
 
+.. code-block:: gdscript GDScript
+   func _ready():
+       $AnimatedSprite2D.play("idle")
+
+La fonction ``_ready()`` s'éxécute dès que l'objet est ajouté à la scène.
+Ensuite, la ligne ``$AnimatedSprite2D.play("idle")`` prend le fils ``AnimatedSprite2D`` de notre joueur,
+et lui dit de jouer l'animation "idle" (l'animation par défaut)
+
+
+Changement dynamique de l'animation
+~~~~~~~~~~
+
+Maintenant que l'animation se joue, on aimerait bien qu'elle change dynamiquement selon si le personnage bouge, ou pas
+Pour celà, on va détecter, dans ``_physics_process`` quand le joueur bouge, ou pas.
+
+Vous pouvez alors ajouter ce bout de code à la fin de ``_physics_process``:
+
+.. code-block:: gdscript GDScript
+   func _physics_process(delta):
+       ...
+   	   if direction == Vector2.ZERO:
+		   $AnimatedSprite2D.animation = "idle"
+	   else:
+		   $AnimatedSprite2D.animation = "run"
+
+Donc à chaque update, on va regarder si le joueur est imobile (si il ne va dans aucune direction),
+si oui, on va dire à l'``AnimatedSprite2D`` de changer l'animation à l'animation d'``idle``.
+Sinon, celà veut dire que le joueur est en train de bouger,
+donc on va dire à l'``AnimatedSprite2D`` de de changer l'animation à l'animation de ``run``.
+
+
+Changement dynamique de l'orientation du sprite
+~~~~~~~~~~
+
+Nous avons un sprite animé, et qui change d'animation dynamiquement.
+Mais qu'on aille à droite ou à gauche, le sprite, lui, est toujours tourné vers la droite.
+
+Nous allons donc tourner le sprite du joueur, selon al direction dans laquelle le joueur va.
+
+.. hint:: Exercice:
+   Tourner le joueur selon là où il va est similaire à changer son animation selon si il cours.
+   Essayez donc d'implémenter cette fonctionalité tout seuls, sans regarder la solution.
+   Indice: Par défaut, ``$AnimatedSprite2D.flip_h = false``, et il faut mettre cette variable
+   à ``true`` pour inverser le sprite
+
+Le code pour faire celà est:
+
+.. code-block:: gdscript GDScript
+	   if direction.x > 0:
+		   $AnimatedSprite2D.flip_h = false
+	   elif direction.x < 0:
+		   $AnimatedSprite2D.flip_h = true
+
+.. warning::
+   Si dans le code précédent, vous aviez mis un ``else:`` à la place du ``elif direction.x < 0:``,
+   votre joueur va se retourner à sa direction initiale, dès que vous arrétez d'avancer.
 
 .. move-fin:
 
@@ -149,9 +349,55 @@ Peaufinage des mouvements
 --------
 
 Actuellement, nous avons un système de mouvement qui fonctionne,
-mais qui n'est pas très agréable à utiliser, alors on va l'ameillorer
+mais qui n'est pas très agréable à utiliser, nous allons donc l'ameillorer !
+
+Ajustement des mouvements en diagonales
+~~~~~~~~~~
+
+Le premier problème c'est que notre joueur se déplace plus vite quand il va en diagonale, que quand il va en ligne doite.
+Ceci est par ce que:
+
+.. math:: \begin{Vmatrix} 0 \\ 1 \end{Vmatrix} = \begin{Vmatrix} 1 \\ 0 \end{Vmatrix} = 1 < \begin{Vmatrix} 1 \\ 1 \end{Vmatrix} = \sqrt{2}
+
+Donc pour régler celà, il va falloir faire en sorte que la longueur du vecteur direction soit toujours égale à 1.
+Pour celà, il existe la fonction ``.normalized()`` qui fait tout juste ça.
+
+Vous pouvez donc la rajouter à la fin de la définition de ``direction``:
+
+.. code-block:: gdscript GDScript
+   var direction:Vector2 = Vector2(Input.get_axis("ui_left", "ui_right"), Input.get_axis("ui_up", "ui_down")).normalized()
+
+Ajout d'inertie
+~~~~~~~~~~
+
+Actuellement, notre joueur atteint sa vitesse maximale instantanément, et s'arrête instantanément
+Pour remédier à ce problème, nous allons utiliser une fonction, appelée la fonction ``lerp``.
+Elle s'utilise de cette façon:
+
+.. code-block:: gdscript GDScript
+   val = lerp(val, max_val, poid)
 
 
-[temp :]
-- normalisation vect ``direction``
-- ajout inertie:``lerp``
+Et elle va retourner la prochaine valeur que notre variable doit prendre pour avoir une transition
+douce entre la valeur initiale et notre valeur maximale.
+Et le poid va nous permettre de déterminer la "douceur" de la transition:
+
+.. image:: img/graphLerp.png
+
+Dans notre cas, le poid représentera l'accélération.
+Or, on veut que l'accélération dépende du temps qui s'est écoulé,
+et pas du nombre de frames (car celui-ci peut varier selon les ordinateurs)
+
+On peut donc initier une variable ``acceleration`` dans le corps principal:
+
+.. code-block:: gdscript GDScript
+   @export var acceleration:float = 10
+
+
+Et on peut changer la ligne qui initiait ``velocity`` dans ``_physics_process(delta):``:
+
+.. code-block:: gdscript GDScript
+   velocity = lerp(velocity, direction * speed, acceleration * delta)
+
+
+Et avec ça, nous avons fini la création de notre joueur, ainsi que de son système de mouvement !
