@@ -4,13 +4,9 @@
 <svg
    version="1.1"
    id="svg1"
-   width="2183"
-   height="3023"
-   viewBox="0 0 2183 3023"
-   sodipodi:docname="arcadia_icon.svg"
-   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25)"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   width="655.93005"
+   height="908.32642"
+   viewBox="0 0 655.93005 908.32642"
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
@@ -31,38 +27,9 @@
          id="image1" />
     </mask>
   </defs>
-  <sodipodi:namedview
-     id="namedview1"
-     pagecolor="#505050"
-     bordercolor="#ffffff"
-     borderopacity="1"
-     inkscape:showpageshadow="0"
-     inkscape:pageopacity="0"
-     inkscape:pagecheckerboard="1"
-     inkscape:deskcolor="#505050"
-     inkscape:zoom="0.44670654"
-     inkscape:cx="1386.8165"
-     inkscape:cy="662.62742"
-     inkscape:window-width="2240"
-     inkscape:window-height="1331"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="g1">
-    <inkscape:page
-       x="0"
-       y="0"
-       inkscape:label="1"
-       id="page1"
-       width="2183"
-       height="3023"
-       margin="0"
-       bleed="0" />
-  </sodipodi:namedview>
   <g
      id="g1"
-     inkscape:groupmode="layer"
-     inkscape:label="1">
+     transform="matrix(0.30047185,0,0,0.30047185,0,1.6015625e-5)">
     <path
        id="path1"
        d="m 818.25,2172.75 v -31.5 H 630 v -63 H 441 v -63 H 252 v -63 H 126 v -63 H 63 v -630 h 63 v -63 h 126 v -63 h 63 V 1071 h 63 V 567 H 315 V 504 H 252 V 441 H 189 V 126 h 63 V 63 h 252 v 63 h 189 v 63 h 188.25 v 63 h 252 v 63 h 126 v 63 h 63 v 63 h 63 v 63 h 63 v 63 h 63 v 63 h 63 v 1196.25 h -63 v 63 h -63 v 63 h -63 v 63 h -126 v 63 h -126 v 63 h -126 v 63 h -189 z"
