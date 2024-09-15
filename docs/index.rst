@@ -5,7 +5,7 @@
 
 .. note::
 
-   Ce tutoriel est en plein développement. Reviens plus tard quand il sera terminé!
+   Ce tutoriel est en plein développement. Il ne couvre que jusqu'à la création du joueur.
 
 Voici un petit sommaire de ce que ce tutoriel propose:
 
