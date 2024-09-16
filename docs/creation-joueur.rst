@@ -376,7 +376,7 @@ On voit ici que le vecteur bleu (en diagonale) a une norme plus grande que les v
 Ainsi, lorsque le personnage se déplace en diagonale, il va plus vite:
 
 .. math::
-   N_rouge} = \left\| \begin{pmatrix} 1 & 0 \end{pmatrix} \right\| = 1 \quad
+   N_{rouge} = \left\| \begin{pmatrix} 1 & 0 \end{pmatrix} \right\| = 1 \quad
    N_{vert} = \left\| \begin{pmatrix} 0 & 1 \end{pmatrix} \right\| = 1 \quad
    N_{bleu} = \left\| \begin{pmatrix} 1 & 1 \end{pmatrix} \right\| = \sqrt{2}
 
