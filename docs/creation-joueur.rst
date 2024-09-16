@@ -1,5 +1,5 @@
 Création du Joueur
-========
+==================
 
 Dans cette partie du tutoriel, nous allons créer un joueur, lui ajouter des animations, et des mouvements basiques.
 À la fin de cette section, vous devriez avoir tout ça:
@@ -10,7 +10,7 @@ Dans cette partie du tutoriel, nous allons créer un joueur, lui ajouter des ani
 .. _init-joueur:
 
 Initialisation du Joueur
---------
+------------------------
 
 Pour commencer, nous allons créer un ``CharacterBody2D``. C'est un nœud 2D, qui est utilisé pour créer des personnages qui peuvent se déplacer.
 En haut à gauche, dans l'arborescence des scènes, créez une nouvelle scène en cliquant sur le bouton **Other Node** ou le bouton **+**. Ajoutez un ``CharacterBody2D``.
@@ -42,7 +42,7 @@ Vous pouvez changer sa taille avec les petits cercles oranges, mais on fera ça 
 .. _init-anims:
 
 Création d'animations
---------
+---------------------
 
 À présent, nous avons un joueur constitué d'un ``CharacterBody2D`` et d'une ``CollisionShape2D``. Il nous manque du visuel!
 Nous allons donc ajouter un sprite à notre joueur.
@@ -115,14 +115,14 @@ Et finalement, vous pouvez ajuster la hitbox crée :ref:`précédemment <init-jo
 .. _move-init:
 
 Création des mouvements
---------
+-----------------------
 
 Actuellement nous avons un joueur, qui a des animations, mais qui ne fait pas grand chose.
 Si vous lancez la scène avec *F6* ou en cliquant sur *l'icône de Clap avec un petit triangle* en haut à droite, vous verrez votre joueur dans un coin de l'écran qui ne peut pas se déplacer.
 Dans cette partie, nous allons lui ajouter des mouvements rudimentaires.
 
 Création du script
-~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~
 
 Pour ce faire, nous allons devoir utiliser des bouts de code.
 Premièrement, nous allons rattacher un script au Joueur, en séléctionnant le CharacterBody2D dans la hiérarchie,
@@ -142,7 +142,7 @@ Validez, et votre éditeur changera en mode "Script" pour ouvrir le fichier cré
 .. image:: img/playerEmptyScript.png
 
 Initiation à GDScript
-~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 Le fichier créé est en GDScript, le langage de script utilisé par godot.
 Ce langage est très similaire à python, donc si vous avez un peu d'expérience en python,
@@ -213,7 +213,7 @@ Par exemple:
 
 
 Implémentation mouvements rudimentaires
-~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Concrètement, pour bouger notre joueur, il nous faut plusieurs choses:
 
@@ -223,7 +223,7 @@ Concrètement, pour bouger notre joueur, il nous faut plusieurs choses:
 
 Pour celà, nous pouvons utiliser le code suivant:
 
-.. code-block:: gdscript
+.. code-block:: GDScript
 
    func _physics_process(delta):
        var directionX:int = Input.get_axis("ui_left", "ui_right")
@@ -286,13 +286,13 @@ De plus, dans ce code, on va mettre la vitesse maximale dans une variable, ``spe
 .. _anims-fin:
 
 Animation du personage
---------
+----------------------
 
 Actuellement, notre personage bouge, mais il reste toujours statiquement dans la même frame de la même animation.
 Il est temps de changer ça !
 
 Lancement de l'animation au début du jeu
-~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Il nous faut premièrement que l'animation du personnage se joue, dès qu'il est ajouté au jeu.
 Pour faire cela, on peut utiliser ce code:
@@ -308,7 +308,7 @@ et lui dit de jouer l'animation "idle" (l'animation par défaut)
 
 
 Changement dynamique de l'animation
-~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Maintenant que l'animation se joue, on aimerait bien qu'elle change dynamiquement selon si le personnage bouge, ou pas
 Pour cela, on va détecter, dans ``_physics_process`` quand le joueur bouge, ou pas.
@@ -331,7 +331,7 @@ donc on va dire à l'``AnimatedSprite2D`` de changer l'animation à l'animation 
 
 
 Changement dynamique de l'orientation du sprite
-~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Nous avons un sprite animé, qui change d'animation dynamiquement.
 Mais qu'on aille à droite ou à gauche, le sprite, lui, est toujours tourné vers la droite.
@@ -360,13 +360,13 @@ Le code pour faire cela est:
 .. _move-fin:
 
 Peaufinage des mouvements
---------
+-------------------------
 
 Actuellement, nous avons un système de mouvement qui fonctionne,
 mais qui est assez rudimentaire, nous allons donc l'améliorer!
 
 Ajustement des mouvements en diagonales
-~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Le premier problème, c'est que notre joueur se déplace plus vite quand il va en diagonale, que lorsqu'il va en ligne doite:
 
@@ -391,7 +391,7 @@ Vous pouvez donc la rajouter à la fin de la définition de ``direction``:
    var direction:Vector2 = Vector2(Input.get_axis("ui_left", "ui_right"), Input.get_axis("ui_up", "ui_down")).normalized()
 
 Ajout d'inertie
-~~~~~~~~~~
+~~~~~~~~~~~~~~~
 
 Actuellement, notre joueur atteint sa vitesse maximale instantanément, et s'arrête instantanément.
 Pour remédier à ce problème, nous allons utiliser une fonction, appelée ``lerp``, qui s'utilise de cette façon:

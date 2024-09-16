@@ -33,19 +33,19 @@ extensions = [
     "sphinx.ext.autosummary",
     "sphinx.ext.intersphinx",
     "sphinx.ext.mathjax",
-    '_extensions.gdscript',
-    '_extensions.godot_description',
+    'gdscript',
+    'godot_descriptions',
 
 ]
 
 # For math LaTeX
-mathjax_config = {
-    'tex': {
-        'packages': [
-            {'name': 'color', 'options': 'table'},
-        ],
-    }
-}
+# mathjax_config = {
+#     'tex': {
+#         'packages': [
+#             {'name': 'color', 'options': 'table'},
+#         ],
+#     }
+# }
 latex_elements = {
     'preamble': r'''
         \usepackage{amsmath}
@@ -82,7 +82,11 @@ html_theme = "sphinx_rtd_theme"
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ["_static"]
+html_static_path = ['_static']
+html_css_files = [
+    # 'https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css',
+    'custom.css',
+]
 html_logo = "img/arcadia_doc_logo.png"
 
 html_context = {
@@ -101,15 +105,14 @@ html_theme_options = {
 
 
 
-# For highlinting GDScript for real bro
+# # For highlinting GDScript for real bro
+sys.path.insert(0, os.path.abspath('_extensions'))
 highlight_language = 'gdscript'
 
-from _extensions.gdscript import GDScriptLexer
-
+from gdscript import GDScriptLexer
 from sphinx.highlighting import lexers
 
 lexers['gdscript'] = GDScriptLexer()
-
 
 # # For highlighting GDScript
 # highlight_language = 'gdscript'
