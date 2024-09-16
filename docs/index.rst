@@ -15,7 +15,7 @@ Contents
 .. toctree::
    :maxdepth: 1
 
-   Acceuil <self>
+   Accueil <self>
    Découverte de Godot <decouverte-godot>
    Création du Joueur <creation-joueur>
    Création du Monde <creation-monde>
