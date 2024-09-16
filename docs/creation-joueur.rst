@@ -370,15 +370,16 @@ Ajustement des mouvements en diagonales
 
 Le premier problème, c'est que notre joueur se déplace plus vite quand il va en diagonale, que lorsqu'il va en ligne doite:
 
-.. img/movementnorm.png
+.. image:: img/movementnorm.png
 
 On voit ici que le vecteur bleu (en diagonale) a une norme plus grande que les vecteurs rouge et vert (qui sont unitaire, c'est-à-dire que leur norme vaut 1).
 Ainsi, lorsque le personnage se déplace en diagonale, il va plus vite:
 
 .. math::
-   N_{rouge} = \left\| \begin{pmatrix} 1 \\ 0 \end{pmatrix} \right\| = 1 \quad
-   N_{vert} = \left\| \begin{pmatrix} 0 \\ 1 \end{pmatrix} \right\| = 1 \quad
-   N_{bleu} = \left\| \begin{pmatrix} 1 \\ 1 \end{pmatrix} \right\| = \sqrt{2}
+   N_rouge} = \left\| \begin{pmatrix} 1 & 0 \end{pmatrix} \right\| = 1 \quad
+   N_{vert} = \left\| \begin{pmatrix} 0 & 1 \end{pmatrix} \right\| = 1 \quad
+   N_{bleu} = \left\| \begin{pmatrix} 1 & 1 \end{pmatrix} \right\| = \sqrt{2}
+
 
 Pour régler cela, il faut faire en sorte que la longueur du vecteur direction soit toujours égale à 1, on appelle ça normaliser un vecteur.
 Pour cela, il existe la méthode ``.normalized()`` qui renvoie le vecteur normalisé.

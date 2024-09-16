@@ -32,8 +32,26 @@ extensions = [
     "sphinx.ext.doctest",
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
-    "sphinx.ext.intersphinx"
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.mathjax",
 ]
+
+# For math LaTeX
+mathjax_config = {
+    'tex': {
+        'packages': [
+            {'name': 'color', 'options': 'table'},
+        ],
+    }
+}
+latex_elements = {
+    'preamble': r'''
+        \usepackage{amsmath}
+        \usepackage{amssymb}
+    ''',
+}
+
+
 
 intersphinx_mapping = {
     "rtd": ("https://docs.readthedocs.io/en/stable/", None),
