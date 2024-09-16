@@ -34,6 +34,9 @@ extensions = [
     "sphinx.ext.autosummary",
     "sphinx.ext.intersphinx",
     "sphinx.ext.mathjax",
+    'gdscript',
+    'godot_description',
+
 ]
 
 # For math LaTeX
@@ -98,11 +101,25 @@ html_theme_options = {
 }
 
 
-# GDScript syntax highlighting
-from gdscript import GDScriptLexer
+# For highlighting GDScript
+highlight_language = 'gdscript'
+
 from sphinx.highlighting import lexers
+from pygments.lexers import get_lexer_by_name
 
-lexers["gdscript"] = GDScriptLexer()
+class GDScriptLexer(get_lexer_by_name('gdscript')):
+    # Configuration spécifique pour GDScript
+    pass
 
-pygments_style = 'sphinx'
-highlight_language = "gdscript"
+lexers['gdscript'] = GDScriptLexer()
+
+
+
+# # GDScript syntax highlighting
+# from gdscript import GDScriptLexer
+# from sphinx.highlighting import lexers
+
+# lexers["gdscript"] = GDScriptLexer()
+
+# pygments_style = 'sphinx'
+# highlight_language = "gdscript"
