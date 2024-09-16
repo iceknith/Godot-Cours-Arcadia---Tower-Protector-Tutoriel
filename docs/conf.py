@@ -100,17 +100,28 @@ html_theme_options = {
 }
 
 
-# For highlighting GDScript
+
+# For highlinting GDScript for real bro
 highlight_language = 'gdscript'
 
-from sphinx.highlighting import lexers
-from pygments.lexers import get_lexer_by_name
+from _extensions.gdscript import GDScriptLexer
 
-class GDScriptLexer(get_lexer_by_name('gdscript')):
-    # Configuration spécifique pour GDScript
-    pass
+from sphinx.highlighting import lexers
 
 lexers['gdscript'] = GDScriptLexer()
+
+
+# # For highlighting GDScript
+# highlight_language = 'gdscript'
+
+# from sphinx.highlighting import lexers
+# from pygments.lexers import get_lexer_by_name
+
+# class GDScriptLexer(get_lexer_by_name('gdscript')):
+#     # Configuration spécifique pour GDScript
+#     pass
+
+# lexers['gdscript'] = GDScriptLexer()
 
 
 
