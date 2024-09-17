@@ -84,10 +84,10 @@ html_theme = "sphinx_rtd_theme"
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 html_css_files = [
-    # 'https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css',
+    'https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css',
     'custom.css',
 ]
-html_logo = "img/arcadia_doc_logo.png"
+html_logo = "img/arcadiadocslogov2scaled.png"
 
 html_context = {
    "default_mode": "dark"
