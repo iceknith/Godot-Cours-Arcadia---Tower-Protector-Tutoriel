@@ -84,7 +84,7 @@ html_theme = "sphinx_rtd_theme"
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 html_css_files = [
-    'https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css',
+    # 'https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css',
     'custom.css',
 ]
 html_logo = "img/arcadiadocslogov2scaled.png"
@@ -104,7 +104,6 @@ html_theme_options = {
 }
 
 
-
 # # For highlinting GDScript for real bro
 sys.path.insert(0, os.path.abspath('_extensions'))
 highlight_language = 'gdscript'
@@ -114,25 +113,10 @@ from sphinx.highlighting import lexers
 
 lexers['gdscript'] = GDScriptLexer()
 
-# # For highlighting GDScript
-# highlight_language = 'gdscript'
 
-# from sphinx.highlighting import lexers
-# from pygments.lexers import get_lexer_by_name
-
-# class GDScriptLexer(get_lexer_by_name('gdscript')):
-#     # Configuration spécifique pour GDScript
-#     pass
-
-# lexers['gdscript'] = GDScriptLexer()
-
-
-
-# # GDScript syntax highlighting
-# from gdscript import GDScriptLexer
-# from sphinx.highlighting import lexers
-
-# lexers["gdscript"] = GDScriptLexer()
-
-# pygments_style = 'sphinx'
-# highlight_language = "gdscript"
+# For hiding unfinished pages
+exclude_patterns += [
+    'creation-monde.rst',
+    'creation-tour.rst',
+    'creation-ennemis.rst'
+]

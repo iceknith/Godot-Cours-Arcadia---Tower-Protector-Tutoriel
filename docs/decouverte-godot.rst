@@ -7,7 +7,7 @@ Godot, c'est quoi?
 ------------------
 
 Godot Engine (prononcé *Godo* ou *Godote* ou comme vous voulez en fait) est un moteur de jeu open-source et gratuit très facile d'accès.
-Godot permet de développer des jeux 2D et 3D grâce à une interface visuelle intuitive et un langage de script facile à apprendre, le *GDScript*, qui ressemble fortement à Python.
+Godot permet de développer des jeux 2D et 3D grâce à une interface visuelle intuitive et un langage de script facile à apprendre, le **GDScript**, qui ressemble fortement à Python.
 Godot est autant utilisé pour des petits jeux indépendants (comme nous!) que pour des jeux plus complexes (comme nous dans le futur, on l'espère!).
 
 Godot fonctionne avec des scènes et des nœuds. On y reviendra un peu plus tard, mais un nœud, c'est un élément de base, qui compose vos scènes.
@@ -32,14 +32,14 @@ Une fois le fichier .zip téléchargé et dézippé, vous pouvez lancer l’inst
 Création de votre premier projet
 --------------------------------
 
-Cette fenêtre s'appelle le `Project Manager`. C'est ici que vous trouverez vos différents projets une fois que vous les aurez créés.
-Actuellement, le `Project Manager` est vide, donc créons notre premier projet.
+Cette fenêtre s'appelle le **Project Manager**. C'est ici que vous trouverez vos différents projets une fois que vous les aurez créés.
+Actuellement, le **Project Manager** est vide, donc créons notre premier projet.
 
 .. note::
    Pour ce tutoriel, certains termes et screenshots que nous utiliserons seront en anglais.
    C'est généralement un meilleur choix de tout mettre en anglais lorsque l'on programme, et la documentation sur internet est plus fournie en anglais qu'en français.
    Libre à vous de mettre votre éditeur dans la langue de votre choix, mais il se peut que certains boutons n'aient pas les mêmes libellés chez vous.
-   Vous pouvez changer la langue de l'éditeur dans les `Paramètres` en haut à droite du `Project Manager`, ou dans `Editor Settings` dans l'éditeur.
+   Vous pouvez changer la langue de l'éditeur dans les **Paramètres** en haut à droite du **Project Manager**, ou dans **Editor Settings** dans l'éditeur.
 
 Cliquer sur le bouton **Create** en haut à gauche pour créer un nouveau projet.
 Un popup s’ouvrira, en vous demandant des informations sur votre projet. Nommez votre projet ``"Tuto Arcadia"`` **[1]**, et choisissez le fichier dans lequel vous voulez qu’il soit stocké **[2]**.
@@ -58,23 +58,23 @@ Dans cette sous-partie, nous allons décrire les différents éléments qui comp
 
 1. Au milieu, vous trouverez la fenêtre principale de l'éditeur, celle-ci vous permettera de visionner et de modifier les différentes scènes de votre projet.
 
-2. En bas à gauche, vous trouverez l'*Arborescence du projet*.
+2. En bas à gauche, vous trouverez l'**Arborescence du projet**.
    Il s'agit en réalité du dossier que vous venez de créer en créant le projet.
    Vous pouvez le retrouver sur votre ordinateur en suivant le chemin de votre projet (que vous avez rempli plus tôt).
 
-3. Juste au dessus, en haut à gauche, on trouve l'*Arborescence des scènes*. C'est là que vous pourrez modifier la `scène` en cours.
-   Chaque partie du jeu (le joueur, les ennemis, le monde) est une `scène`.
-   Une `scène` est composée d'un `nœud` racine, qui peut avoir plusieurs autres `nœuds` enfants.
-   Chaque `nœud` a un rôle particulier (un `nœud` pour la collision, un pour la texture, etc), on en apprendra plus sur ce fonctionnement en créant le joueur.
-   Une `scène` étant juste un `nœud` parent et ses enfants, il est tout à fait possible de mettre une `scène` entière en tant qu'enfant d'une autre `scène`.
+3. Juste au dessus, en haut à gauche, on trouve l'**Arborescence des scènes**. C'est là que vous pourrez modifier la **scène** en cours.
+   Chaque partie du jeu (le joueur, les ennemis, le monde) est une scène.
+   Une scène est composée d'un **nœud** racine, qui peut avoir plusieurs autres nœuds enfants.
+   Chaque nœud a un rôle particulier (un nœud pour la collision, un pour la texture, etc), on en apprendra plus sur ce fonctionnement en créant le joueur.
+   Une scène étant juste un nœud parent et ses enfants, il est tout à fait possible de mettre une scène entière en tant qu'enfant d'une autre scène.
 
-4. A droite, on peut voir l'*Inspecteur*, c'est la partie de l'éditeur qui va vous permettre de modifier les différents paramètres du `nœud` sélectionné.
-   Il est pour l'instant vide (ce qui est normal car il n'y a aucun `noeud` sélectionné), mais on s'en servira très souvent.
+4. A droite, on peut voir l'**Inspecteur**, c'est la partie de l'éditeur qui va vous permettre de modifier les différents paramètres du nœud sélectionné.
+   Il est pour l'instant vide (ce qui est normal car il n'y a aucun nœud sélectionné), mais on s'en servira très souvent.
 
-5. En haut, vous trouverez les différents onglets. Actuellement, vous devriez être sur l'onglet *3D*, c'est celui qui est utilisé pour visualiser des scènes 3D.
-   On ne s'en servira pas pour ce projet, qui sera entièrement en 2D (on utilisera donc l'onglet *2D*).
-   Il y a aussi l'onglet *Script*, qui est l'endroit où on écrira tout notre code.
-   Et l'onglet *AssetLib* qui ne nous servira pas pour l'instant mais où vous pouvez télécharger des assets que d'autres gens ont fait.
+5. En haut, vous trouverez les différents onglets. Actuellement, vous devriez être sur l'onglet **3D**, c'est celui qui est utilisé pour visualiser des scènes 3D.
+   On ne s'en servira pas pour ce projet, qui sera entièrement en 2D (on utilisera donc l'onglet **2D**).
+   Il y a aussi l'onglet **Script**, qui est l'endroit où on écrira tout notre code.
+   Et l'onglet **AssetLib** qui ne nous servira pas pour l'instant mais où vous pouvez télécharger des assets que d'autres gens ont fait.
 
 6. En haut à gauche, vous trouverez différents paramètres.
    L'onglet le plus important est **Project -> Project Settings**, où vous pourrez modifier les différents paramètres du projet (comme la taille de la fenêtre par exemple).

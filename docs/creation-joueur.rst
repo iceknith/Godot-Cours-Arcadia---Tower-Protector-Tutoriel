@@ -102,7 +102,7 @@ Maintenant, vous pouvez jouer l'animation, en appuyant sur **play** **[1]**,
 et changer la vitesse de l'animation, en changeant ses **FPS** (Frames Per Second / Images par seconde) **[2]**.
 
 Une animation d'idle c'est bien, mais, nous aimerions que notre joueur puisse bouger,
-donc on va rajouter une animation de course, qu'on appellera ``run``.
+donc on va rajouter une animation de course.
 
 Pour cela, appuyez sur **Add Animation**, en haut à gauche de la fenêtre `SpriteFrames`.
 Renommez cette animation ``"run"``, et répétez les mêmes étapes que pour l'animation d'idle,
@@ -112,22 +112,34 @@ Pour plus de fluidité, vous pouvez mettre les deux animations à **8 FPS** (ou 
 
 Et finalement, vous pouvez ajuster la hitbox crée :ref:`précédemment <init-joueur>` à notre sprite.
 
+.. tip::
+   Pour ajuster la taille de la collision plus facilement, vous pouvez glisser la ``CollisionShape2D`` en dessous de l'``AnimatedSprite2D`` dans la scène.
+   Les nœuds qui sont **en dessous** dans l'arborescence apparaîtront **au dessus** dans l'éditeur (car ils sont créés après, et sont donc rendus au dessus).
+   Vous pouvez ensuite remettre la ``CollisionShape2D`` à sa place. Ce n'est pas très important, car elle ne sera pas visible une fois le jeu lancé.
+
+.. image:: img/playerspriteandcollision.png
+
+.. note::
+   Il est généralement préférable d'avoir une hitbox légèrement plus petite que le visuel du personnage.
+   Cela évite des situations du type: *"Mais* **#@!$&** *j'aurais pas dû mourir là l'ennemi il m'a même pas touché c'est abusé ce jeu est trop nul!"*
+
 .. _move-init:
 
 Création des mouvements
 -----------------------
 
 Actuellement nous avons un joueur, qui a des animations, mais qui ne fait pas grand chose.
-Si vous lancez la scène avec *F6* ou en cliquant sur *l'icône de Clap avec un petit triangle* en haut à droite, vous verrez votre joueur dans un coin de l'écran qui ne peut pas se déplacer.
+Si vous lancez la scène avec **F6** ou en cliquant sur **l'icône de Clap avec un petit triangle** en haut à droite, vous verrez votre joueur dans un coin de l'écran qui ne peut pas se déplacer.
 Dans cette partie, nous allons lui ajouter des mouvements rudimentaires.
 
 Création du script
 ~~~~~~~~~~~~~~~~~~
 
 Pour ce faire, nous allons devoir utiliser des bouts de code.
-Premièrement, nous allons rattacher un script au Joueur, en séléctionnant le CharacterBody2D dans la hiérarchie,
-et en cliquant sur *l'icône en forme de parchemin* en haut de la fenêtre hiérarchie:
-`Attach a new or existing script to the selected node`
+Premièrement, nous allons rattacher un script au Joueur, en séléctionnant le ``CharacterBody2D`` dans la hiérarchie,
+et en cliquant sur **l'icône en forme de parchemin**: `Attach a new or existing script to the selected node` en haut de la fenêtre hiérarchie
+(ou **Clic-droit -> Attach Script**).
+
 Ce pop-up s'ouvrira alors:
 
 .. image:: img/createplayerscript.png
@@ -135,18 +147,18 @@ Ce pop-up s'ouvrira alors:
 Il vous faudra:
 
 1. Décocher la case template
-2. Renseigner l'endroit où votre script sera stocké. Mettez-le dans un nouveau fichier, nommé ``scripts`` comme dans l'exemple.
+2. Renseigner l'endroit où votre script sera stocké. Créez un dossier ``"scripts"`` et mettez-y le script ``"player.gd"`` comme dans l'exemple.
 
-Validez, et votre éditeur changera en mode "Script" pour ouvrir le fichier créé:
+Validez, et votre éditeur changera en mode **Script** pour ouvrir le fichier créé:
 
 .. image:: img/playerEmptyScript.png
 
-Initiation à GDScript
-~~~~~~~~~~~~~~~~~~~~~
+Initiation au GDScript
+~~~~~~~~~~~~~~~~~~~~~~
 
-Le fichier créé est en GDScript, le langage de script utilisé par godot.
-Ce langage est très similaire à python, donc si vous avez un peu d'expérience en python,
-vous devrez être plutôt à l'aise en GDScript.
+Le fichier créé est en GDScript, le langage de script utilisé par Godot.
+Ce langage est très similaire à Python, donc si vous avez un peu d'expérience en Python,
+vous devriez être plutôt à l'aise en GDScript.
 
 Nous allons voir ici les éléments essentiels de ce langage: les **variables** et les **fonctions**
 
@@ -156,26 +168,38 @@ Pour créer une variable, il faut écrire:
 
 .. code-block:: gdscript
 
-   var nom = valeur
+   var nom_variable = valeur
 
-Une variable n'a pas de type fixé, ce qui veut dire qu'elle peut changer de type (comme en python).
-Mais on peut lui assigner un type pour:
+En GDScript, les variables ne sont pas typées, c'est-à-dire qu'elles peuvent changer de type, comme en Python.
+Par exemple, on peut écrire:
 
-- Éviter les erreurs de type
+.. code:: gdscript
+
+    var x = 1 # x est de type int (entier)
+    x = "hello" # x est un string (chaîne de caractère)
+
+Il est préférable de typer ses variables, pour plusieurs raisons:
+
+- Éviter les erreurs de type (ne pas faire n'importe quoi avec nos variables, comme dans l'exemple précédent)
 - Donner une indication du type de notre variable à notre éditeur, pour qu'il nous suggère des informations pertinentes
+- Optimiser le code (un code avec des variables typées sera normalement plus rapide qu'un code sans typage)
 
-Pour ce faire, il faut écrire:
+La syntaxe est la suivante:
 
 .. code-block:: gdscript
 
-   var nom:type = valeur
+    var nom:type = valeur
+    # Exemples
+    var x: int = 1
+    var y: String = "hello"
+    x = "bonjour" # Erreur, on ne peut pas assigner une valeur de type "String" à un "int".
 
 Finalement, vous pouvez *"exporter"* vos variables,
-pour faire en sorte qu'elles soient modifiables depuis l'éditeur principal, en mettant un ``@export`` devant:
+pour faire en sorte qu'elles soient modifiables depuis l'Inspecteur, en mettant ``@export`` devant:
 
 .. code-block:: gdscript
 
-   @export var nom:type = valeur
+   @export var nom_variable:type = valeur
 
 .. warning::
    Attention, vous ne pouvez pas *exporter* des variables définies dans des fonctions
@@ -187,29 +211,32 @@ Pour créer une fonction, il faut écrire:
 
 .. code-block:: gdscript
 
-   func nom(var1, var2, ...):
-      ...
-      return var3
+    func nom_fonction(var1, var2, ...):
+        # ...
+        return var3
 
 
-Cette syntaxe est très similaire à celle de python.
+Cette syntaxe est très similaire à celle de Python.
 Si vous voulez spécifier les types de vos fonctions, vous pouvez faire:
 
 .. code-block:: gdscript
 
-   func nom(var1:type1, var2:type2, ...)->typeRetour:
-      ...
-      return var3
-
+    func nom_fonction(var1:type1, var2:type2, ...)->typeRetour:
+        # ...
+        return var3 # var3 est donc de type typeRetour
+        # Si vous voulez ne rien retourner, mettez void à la place de typeRetour
+        # Vous pouvez alors ne pas mettre de return, ou juste "return" sans rien après
 
 Vous allez parfois utiliser des fonctions prédéfinies, comme ``_ready()`` ou ``_physics_process(delta)``,
-ce sont des fonctions qui sont utilisées par godot, et qui sont appelées à des moments précis.
+ce sont des fonctions qui sont utilisées par Godot, et qui sont appelées à des moments précis.
 Ce sont ces fonctions qui vont vous permettre de faire exécuter un bout de code, à un moment précis.
 Par exemple:
 
-- La fonction ``_ready`` est appelée dès que votre objet est ajouté dans votre jeu
-- La fonction ``_physics_process(delta)`` est appelée à chaque fois que godot refait les calculs de physique (donc elle est appelée quasiment à chaque frame).
-  Et le delta en paramètre est le temps passé depuis le dernier appel.
+- La fonction ``_ready`` est appelée une unique fois lorsque votre objet est ajouté dans votre jeu
+- La fonction ``_physics_process(delta)`` est appelée à chaque fois que Godot refait les calculs de physique (de base: 60 fois par secondes, peu importe le framerate actuel).
+  Le paramètre ``delta`` représente la durée (en secondes) depuis le dernier appel.
+- La fonction ``_process(delta)`` est appelée à chaque frame (différent de ``_physics_process``, car dépend du framerate).
+  Le paramètre ``delta`` représente la durée (en secondes) depuis le dernier appel (depuis la dernière frame).
 
 
 Implémentation mouvements rudimentaires
@@ -236,7 +263,7 @@ Ce code est dans la fonction ``_physics_process`` et s'exécutera donc à chaque
 ``Input.get_axis(input1, input2)`` est une fonction qui va prendre deux inputs, et qui va "simuler" un joystick entre les deux, et dire où ce joystick est.
 Si le joystick est à gauche, donc que input1 est appuyé, la fonction renverra -1,
 si le joystick est à droite, elle renverra 1,
-sinon, elle renverra 0.
+sinon, elle renverra 0 (si vous jouez au joystick, vous pourrez avoir toutes les valeurs entre -1 et 1, mais si vous jouez au clavier, vous n'aurez que les valeurs entières).
 
 Ensuite, après avoir récupéré la direction du joueur sur l'axe X,
 nous allons pouvoir changer la vélocité du joueur sur l'axe X,
@@ -317,12 +344,12 @@ Vous pouvez alors ajouter ce bout de code à la fin de ``_physics_process``:
 
 .. code-block:: gdscript
 
-   func _physics_process(delta):
-       ...
-   	   if direction == Vector2.ZERO:
-		   $AnimatedSprite2D.animation = "idle"
-	   else:
-		   $AnimatedSprite2D.animation = "run"
+    func _physics_process(delta):
+        # ...
+        if direction == Vector2.ZERO:
+            $AnimatedSprite2D.animation = "idle"
+        else:
+            $AnimatedSprite2D.animation = "run"
 
 Donc à chaque update, on va regarder si le joueur est immobile (si il ne va dans aucune direction),
 si `oui`, on va dire à l'``AnimatedSprite2D`` de changer l'animation à l'animation d'``idle``.
@@ -348,10 +375,10 @@ Le code pour faire cela est:
 
 .. code-block:: gdscript
 
-	   if direction.x > 0:
-		   $AnimatedSprite2D.flip_h = false
-	   elif direction.x < 0:
-		   $AnimatedSprite2D.flip_h = true
+    if direction.x > 0:
+        $AnimatedSprite2D.flip_h = false
+    elif direction.x < 0:
+        $AnimatedSprite2D.flip_h = true
 
 .. warning::
    Si dans le code précédent, vous aviez mis un ``else:`` à la place du ``elif direction.x < 0:``,
