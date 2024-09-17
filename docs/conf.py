@@ -115,8 +115,8 @@ lexers['gdscript'] = GDScriptLexer()
 
 
 # For hiding unfinished pages
-exclude_patterns += [
-    'creation-monde.rst',
-    'creation-tour.rst',
-    'creation-ennemis.rst'
-]
+# exclude_patterns += [
+#     'creation-monde.rst',
+#     'creation-tour.rst',
+#     'creation-ennemis.rst'
+# ]
