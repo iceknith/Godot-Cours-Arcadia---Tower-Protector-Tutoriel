@@ -2,7 +2,7 @@ Création du monde
 =================
 
 Initialisation du monde
------------------
+-----------------------
 
 Actuellement, on as un joueur, mais on n'as pas le monde dans lequel ce joueur doit se déplacer.
 Pour ce faire, on va commencer par créer une nouvelle scène qui sera notre `Monde`.
@@ -19,11 +19,12 @@ Vous pouvez renommer ce noeud en `World`, et lui ajouter une tilemap
 (en appuyant sur ``Ctrl+A``, et en cherchant le noeud tilemap dans le popup)
 
 .. note:: Une ``Tilemap`` est une technique populaire pour créer des environnement en 2D.
+    
 Il sagit de créer le monde en collant les uns aux autres des petites images, appelés `tiles`.
 Ça permet non seulement de simplifier la création de niveau, mais ça permet également d'optimiser le jeu.
 
 Customisation de la Tilemap
------------------
+---------------------------
 
 Nous venons de créer une ``Tilemap``, mais elle ne contient pas encore de `tiles` à placer dans notre monde.
 Pour ça, on va créer un ``Tileset``, qui va, entres euatres, contenir toutes nos tiles à placer dans notre monde.
