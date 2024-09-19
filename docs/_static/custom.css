@@ -1337,8 +1337,9 @@ p + .classref-constant {
 .wy-side-nav-search > a img.logo {
     /* Fixed size to prevent reflows and support hiDPI displays */
     /* A 5 pixel margin is added on each side. The logo itself displays at 200×200 at 100% scaling. */
-    width: 266px;
-    height: 266px;
+    /* En gros: mettre la taille du logo +10px */
+    width: 202px;
+    height: 202px;
 }
 
 .wy-side-nav-search {

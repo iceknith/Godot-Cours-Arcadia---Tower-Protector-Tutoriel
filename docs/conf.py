@@ -87,7 +87,7 @@ html_css_files = [
     # 'https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css',
     'custom.css',
 ]
-html_logo = "img/arcadiadocslogov2scaled.png"
+html_logo = "img/arcadiadocslogov2scaled3.png"
 
 html_context = {
    "default_mode": "dark"
