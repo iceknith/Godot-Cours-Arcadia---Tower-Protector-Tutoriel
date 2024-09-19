@@ -25,7 +25,7 @@ Vous pouvez renommer ce noeud en ``"World"``, et lui ajouter un nœud ``TileMapL
   Une tilemap sectionne le monde en une grille. Les cases de cette grille sont remplies avec des blocs que vous placez afin de construire le monde.
   Cette technique est très répandue dans les jeux 2D. Si vous avez joué à Mario Maker, concrètement, lorsque vous crééz un niveau, vous manipulez une tilemap.
 
-Il sagit de créer le monde en collant les uns aux autres des petits blocs de terrain, appelés `tiles`.
+Il s'agit de créer le monde en collant les uns aux autres des petits blocs de terrain, appelés `tiles`.
 Ça permet non seulement de simplifier la création de niveau, mais ça permet également d'optimiser le jeu.
 
 Customisation du TileMapLayer
