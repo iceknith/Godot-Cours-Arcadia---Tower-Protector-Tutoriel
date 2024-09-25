@@ -79,6 +79,9 @@ Allez donc dans **Project -> Project Settings**. Puis sous **Display**, cliquez 
 
 .. image:: img/projectsettingswindow.png
 
+Création des murs
+-----------------
+
 Maintenant, on peut passer aux murs. Pour ce faire, créez un nouveau ``TileMapLayer`` que vous allez appeler ``"TileMapLayerWalls"``, par exemple.
 Ajoutez un nouveau ``TileSet`` dans l'Inspecteur, et changez la taille des tiles en ``32px``.
 
