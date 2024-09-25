@@ -74,6 +74,7 @@ Vous devriez avoir un résultat similaire à ceci:
 Vous voyez que la grille de la tilemap ne s'aligne pas tout à fait avec la fenêtre (le rectangle un peu violet dans l'Éditeur).
 Pour ça, on va changer la taille de la fenêtre pour que ça soit un multiple de 32 (la taille des tiles qu'on utilise).
 Allez donc dans **Project -> Project Settings**. Puis sous **Display**, cliquez sur **Windows** et changez:
+
 - **Viewport Height** = 640
 - **Mode**: ``canvas_item``
 
@@ -107,6 +108,9 @@ Une fois que vous êtes sûr que toutes les tiles ont une collision, vous pouvez
 Essayez de reproduire le résultat ci-dessous:
 
 .. image:: img/emptyworld.png
+
+Ajout du joueur
+---------------
 
 Vous avez terminé le monde! Mettez-y votre joueur en cliquant sur **Instantiate Child Scene** (l'icône de chaîne), ou en cliquant sur ``Ctrl+Shift+A``:
 
