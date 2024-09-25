@@ -24,6 +24,15 @@ Comme pour notre player, il faut lui rajouter une ``CollisionShape2D`` et un ``A
 Rajoutez un ``SpriteFrames`` à l'``AnimatedSprite2D`` dans l'Inspecteur.
 Ajoutez deux animations: ``"alive"`` et ``"dead"``.
 Dans notre jeu, la tour a deux états: elle est vivante la majorité du temps, et elle est morte lorsque suffisamment d'ennemis l'ont touchée.
+Dans l'animation ``"alive"``, cliquez sur **Add frame from file** (ou ``Ctrl+O``) et ajoutez le fichier ``assets/Tower.png``.
+De même, dans l'animation ``"dead"`` ajoutez ``assets/Tower_Destroyed.png``.
+
+
+Pour la collision, rajoutez un ``RectangleShape2D`` ou un ``CapsuleShape2D``.
+Ne recouvrez pas toute la surface de la tour cependant, car on souhaite que le joueur puisse passer derrière la tour.
+Pour ça, mettez la shape uniquement sur la base de la tour, comme ceci:
+
+.. image:: img/tower.png
 
 Script
 ------
