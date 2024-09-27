@@ -32,7 +32,7 @@ Pour la collision, rajoutez un ``RectangleShape2D`` ou un ``CapsuleShape2D``.
 Ne recouvrez pas toute la surface de la tour cependant, car on souhaite que le joueur puisse passer derrière la tour.
 Pour ça, mettez la shape uniquement sur la base de la tour, comme ceci:
 
-.. image:: img/tower.png
+.. image:: img/towerbeforeoffset.png
 
 Script
 ------
@@ -126,4 +126,42 @@ Voilà donc le script pour faire tout ça:
             $AnimatedSprite2D.animation = "dead"
 
 Bon, on n'a pas vraiment de moyens de vérifier que tout fonctionne, parce qu'on a ni ennemi ni menu...
-Continuons donc ce tutoriel et créons les ennemis!
+Avant de faire ça cependant, mettons la tour dans notre monde!
+
+Mise dans le monde
+------------------
+
+Dans la scène du monde, ajoutez la tour, comme vous avez fait pour le joueur.
+Positionnez la tour au milieu de la map, et faites attention à l'ordre des nœuds dans l'arborescence pour que la tour et le joueur soient bien affichés au dessus du tilemap.
+
+En jouant, vous pourrez remarquer que l'affichage de la tour et du joueur n'est pas très cohérent.
+Vous pourrez observer l'une ou l'autre des situations ci-dessous, selon que le joueur est en dessous de la tour dans l'arborescence (image de gauche) ou au dessus (image de droite).
+
+.. image:: img/playertowernotsorted.png
+
+Pour régler ce problème, on va activer la propriété **Y sort**.
+Cela va permettre d'afficher les différents éléments du jeu selon leur position sur l'axe Y.
+Les éléments les plus hauts seront affichés derrière (par exemple, si le joueur est plus haut que la tour, ça veut dire qu'il est derrière).
+Et les élements les plus bas seront affichés devant.
+
+Pour ça donc, activez **Y Sort Enabled** dans l'inspecteur sur les nœuds ``Player``, ``Tower``, et ``World``:
+
+.. image:: img/ysort.png
+
+Si on active pas la propriété sur le nœud ``World``, ça ne fonctionnera pas sur ses nœuds enfants, c'est-à-dire le joueur et la tour, donc faites bien attention à l'activer.
+
+Vous pouvez tester. C'est mieux, mais vous aurez quand même peut-être quelques soucis. Pour ça, on va changer la position de notre tour dans la scène ``tower.tscn``.
+
+Dans l'Inspecteur de l'AnimatedSprite2D, changez l'offset, et mettez une valeur en Y comme -50. Cela va décaler visuellement le sprite de la tour vers le haut, sans changer sa position.
+C'est ce qu'il nous faut, car le Y sort utilise la position des nœuds pour fonctionner. Donc si on n'avait juste changé la position vers le haut, ça n'aurait rien changé.
+
+Décallez aussi la ``CollisionShape2D`` en conséquence, vous devriez obtenir un résultat similaire à celui-ci:
+
+.. image:: img/towerafteroffset.png
+
+Voilà. Vous pouvez retester le jeu, et normalement ce problème devrait être réglé.
+Si vous avez toujours des soucis, essayez de jouer un peu avec les valeurs de l'offset, la taille des collisions, etc.
+
+Finalement, vous devriez avoir un monde comme celui-ci:
+
+.. image:: img/worldwithtowerandplayer.png
