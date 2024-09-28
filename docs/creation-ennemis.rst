@@ -261,21 +261,60 @@ On le rappelle, l'ennemi a deux interactions:
 -   S'il touche le joueur, il meurt
 
 Il nous faut donc un moyen de détecter les collisions avec d'autres corps. Ça tombe bien, l'``Area2D`` est fait pour ça.
-Connectez le signal ``body_entered`` au nœud ``Enemy``.
+Connectez donc le signal ``body_entered`` du nœud ``Enemy`` à son propre script.
 
+.. note::
+    Le signal ``body_entered`` de l'``Area2D`` est émit lorsque celle-ci entre en collision avec un ``PhysicsBody2D``, une classe abstraite
+    dont le ``CharacterBody2D`` et le ``StaticBody2D`` font partie, mais pas l'``Area2D``.
 
+Ici, l'utilisation de ce signal est parfaite, puisqu'on souhaite pouvoir détecter le joueur (``CharacterBody2D``), et la tour (``StaticBody2D``),
+mais pas les ennemis (``Area2D``).
 
+Voici la fonction à rajouter dans le script de l'ennemi.
 
+.. code:: gdscript
 
+    # L'argument body renvoie le corps avec qui il y a eu une collision
+    func _on_body_entered(body):
+        # Si le corps est un joueur, on joue l'animation de mort de l'ennemi
+        if body.name == "Player":
+            $AnimatedSprite2D.animation = "die"
+            
+        # Si le corps est une tour
+        if body.name == "Tower":
+            # On joue l'animation d'explosion de l'ennemi
+            $AnimatedSprite2D.animation = "explode"
+            # On dit à la tour de prendre des dégats
+            body.damage()
 
+Donc si on touche le joueur, l'ennemi meurt. Et si on touche la tour, l'ennemi explose et la tour prend des dégâts.
+Notez que la fonction ``damage()`` qui est appelée ici est celle que l'on avait créée dans le script de la tour.
 
+Vous pouvez tester le jeu. C'est pas mal, les ennemis répondent bien et la tour se détruit au bout de quelques coups.
+Mais les enemis ne disparaissent pas vraiment...
 
+.. image:: img/enemycemetary.png
 
+Cela est dû au fait qu'on ne fait pas disparaître les ennemis. On leur dit de jouer une animation, mais c'est tout.
+On souhaiterai qu'à la fin des animations ``"die"`` et ``"explode"``, ils disparaissent.
+Ça tombe bien, on a un moyen de détecter la fin de ces animations, car on a déjà connecté le signal ``animation_finished``, et on a déjà la fonction correspondante.
 
+Dans la fonction ``_on_animated_sprite_2d_animation_finished()``, ajoutez:
 
+.. code:: gdscript
+    
+    func _on_animated_sprite_2d_animation_finished():
+        # [...] Logique de l'animation de spawn
 
-[temp]
+        if $AnimatedSprite2D.animation == "die" or $AnimatedSprite2D.animation == "explode":
+            queue_free()
 
-- [DONE] Création basique des ennemis (nodes, etc)
-- [Quasi-DONE] Création du script des ennemis
-- [DONE] Faire apparaître les ennemis dans le monde
+.. note::
+    La méthode ``queue_free()``, disponible sur absolument tous les nœuds, permet de détruire un nœud, et donc de l'enlever de la scène.
+
+Bon c'est cool! Maintenant les ennemis fonctionnent parfaitement!
+Bon par contre... une fois que la tour est détruite, il ne se passe plus grand chose... il ne reste qu'une horde d'ennemis kamikaze et un joueur seul et triste.
+
+.. image:: img/kamikaze.png
+
+Changeons tout ça dans la prochaine partie!
