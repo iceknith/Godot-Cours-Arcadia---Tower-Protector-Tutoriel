@@ -22,5 +22,6 @@ Contents
    Création de la tour <creation-tour>
    Création des ennemis <creation-ennemis>
    Création de l'interface <creation-gui>
+   Création du menu <creation-menu>
 
 Pour démarrer l'aventure, cliques sur le bouton `Suivant` en bas à droite de cette page!
