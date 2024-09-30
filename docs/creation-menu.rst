@@ -37,13 +37,18 @@ Finalement, on aura une organisation comme ça:
 Création
 ~~~~~~~~
 
-Commençons sans plus tarder. Créez une nouvelle scène avec un nœud ``Control``, que vous pouvez renommer ``Menu``, et sauvegardez la scène ``menu.tscn``.
+Commençons sans plus tarder. Créez une nouvelle scène avec un ``Node`` (le rond blanc), appelez-le ``Main`` et sauvegardez la scène ``main.tscn``.
+Ajoutez un nœud ``Control`` en enfant, que vous pouvez renommer ``Menu``.
+
+.. note::
+    On reviendra plus tard, dans la partie Script, pourquoi on ajoute le nœud ``Main``.
+    Pour l'instant, faites comme s'il n'était pas là, et faites toute la suite à partir du nœud ``Menu.``
 
 Ensuite, on veut une image de fond. Ajoutez donc un nœud ``TextureRect`` en enfant, et ajoutez-y le fichier ``assets/GUI/BackGround.png`` dans l'Inspecteur.
 Vous verrez alors l'image de fond apparaître. Vous pouvez mettre les deux nœuds en mode **Full Rect**, ça centrera l'image.
 
 Ensuite, on souhaite mettre les éléments restants au milieu. On va déjà créer un ``MarginContainer`` pour centrer tout ça.
-Ajoutez-le en enfant de ``Menu``, mettez*le en **Full Rect**, puis mettez les margin suivantes:
+Ajoutez-le en enfant de ``Menu``, mettez-le en **Full Rect**, puis mettez les margin suivantes:
 
 .. image:: img/marginmenu1.png
 
@@ -117,10 +122,149 @@ En lançant la scène, vous pourrez observer que le texte **Play !** ne suit pas
 
 .. image:: img/playbutton.gif
 
-On règlera ça dans le script, en changeant la valeur du **Margin Top** que l'on vient de mettre. On va essayer de récupérer cette valeur tout de suite pour pas avoir à le faire plus tard.
+On règlera ça plus tard dans le script, en changeant la valeur du **Margin Top** que l'on vient de mettre. On va essayer de récupérer cette valeur tout de suite pour pas avoir à le faire plus tard.
 En pratique, vous devriez calculer de combien de pixels le sprite du ``TextureButton`` est décalé lorsqu'il est pressé.
 Pour ça, vous pouvez faire de plusieurs manières différentes, en essayant de calculer à la main, ou en prenant les sprites sur un logiciel de photomontage...
 Bref, on obtient que le bouton descend de ``4px``, donc il faudra changer la **Margin Top** à ``28px`` (n'oublions pas le \*2!) dans le script.
 
 Le script
 ---------
+
+L'objectif principal du script du menu est de faire la transition entre le menu en lui-même et le monde.
+
+Le Scene Manager
+~~~~~~~~~~~~~~~~
+
+En fait, on va créer un **Scene Manager**. Ce terme peut désigner plusieurs choses mais ici, ça va être une scène qui va contenir les autres scènes principales de notre jeu (donc ici, le menu et le monde).
+Le Scene Manager a les autres scènes comme enfant. Au début, elle a la scène ``Menu`` en enfant, puis une fois que l'on clique sur Play, elle cache ``Menu`` et ajoute la scène ``World`` en enfant.
+Lorsque le joueur perd, on appelle ``queue_free()`` sur l'enfant ``World``, et on rend le menu visible de nouveau.
+
+Ce système de **Scene Manager** peut être très utile dans certains cas et simplifier le jeu, l'optimiser etc, par exemple en pré-chargeant les prochains niveaux, plutôt que de les charger directement au moment où on en a besoin.
+
+.. note::
+    Notez qu'ici, le système que nous mettrons en place n'est pas très optimisé, puisqu'on crée, et on détruit la scène ``World`` à chaque fois que l'on recommence le jeu.
+    Il serait meilleur par exemple, de créer une fonctionnalité de "reset" de la scène, qui remet toutes les variables à zéro, sans détruire la scène (on vous laisse ça en exercice une fois le tuto terminé).
+    Ici, ce n'est pas très grave, puisque la scène est très légère, mais pour des jeux plus complexes, il est nécessaire d'envisager ce genre de solutions.
+
+En fait, on a déjà les débuts de notre **Scene Manager**. Si vous ne l'aviez pas deviné, il s'agit du nœud ``Main`` que nous avons créé au tout début de cette partie.
+
+Ajoutez-donc un script au nœud ``Main``: ``main.gd``.
+Détaillons ce que ce script doit faire:
+
+-   Lorsque l'on appuie sur le bouton Play, cacher le menu, et ajouter la scène ``World`` en enfant.
+-   Lorsque le joueur perd (lorsque le signal is_dead est émit par la tour), détruire l'enfant ``World`` et rendre le menu visible.
+-   Bonus: lorsque le bouton est appuyé, descendre le label **Play !**.
+
+Lancer le jeu
+~~~~~~~~~~~~~
+
+Il nous faut détecter lorsque le bouton est appuyé, pour ça, connectez le signal ``pressed`` du ``TextureButton``.
+Il nous faut ensuite ajouter la scène ``World`` en enfant. On a vu comment faire ça avec les ennemis, donc on peut faire pareil:
+
+.. code:: gdscript
+
+    extends Node
+
+    @export var world: PackedScene
+
+    func _on_texture_button_pressed() -> void:
+        # Faire apparaître le monde
+        var world_instance = world.instantiate()
+        add_child(world_instance)
+        # Cacher le menu
+        $Menu.hide() # équivalent à: $Menu.visible = false
+    
+Dans l'Inspecteur, glissez la scène ``world.tscn`` dans la variable world.
+
+.. warning::
+    Il est important de cacher le menu, car même s'il ne sera pas visible (car la scène du monde sera par dessus),
+    il sera toujours possible d'appuyer sur le bouton **Play**, et donc d'ajouter toujours plus de scènes ``World``.
+
+Ok! En lançant la scène ``Main``, vous pourrez cliquer sur le bouton **Play** et jouer au jeu!
+
+Revenir au menu
+~~~~~~~~~~~~~~~
+
+Maintenant, lorsque la tour se fait détruire, il faut revenir au menu. Pour ça, on dispose du signal ``is_dead`` de la tour que l'on a créé exprès.
+Or, on ne peut pas connecter directement le signal de la tour via l'Inspecteur. On va donc voir une autre manière de connecter les signaux dans Godot, via un script
+(c'est d'ailleurs la "bonne" manière de faire).
+
+Pour ça, juste après l'ajout du monde à la ligne ``add_child(world_instance)``, rajoutez:
+
+.. code:: gdscript
+
+    world_instance.get_node("Tower").is_dead.connect(game_over)
+
+Cette ligne nous permet de récupérer le nœud qui s'appelle "Tower" en enfant du nœud world_instance, et de connecter le signal ``is_dead`` à la fonction ``game_over``.
+On va créer cette fonction juste après dans le script ``Main``. Grâce à ça, dès que ``is_dead`` est émit, la fonction ``game_over`` est appelée.
+
+La fonction ``game_over`` n'est pas encore créée, donc l'éditeur nous crie un peu dessus. Créons-la:
+
+.. code:: gdscript
+
+    func game_over():
+        get_node("World").queue_free() # Détruire le monde
+        $Menu.show() # Rendre le menu de nouveau visible
+
+Testez le jeu en lançant la scène ``Main``. Tout est bon, mais la transition lorsqu'on perd est un peu abrupte.
+On va rajouter un timer de quelques secondes pour avoir le temps d'admirer notre défaite avant de retourner au menu.
+
+On pourrait rajouter un nœud **Timer** dans la scène ``World`` ou ``Main``, mais cela nous rajouterait du travail, car il faudrait connecter les signaux correctement et tout.
+On va donc vous montrer comment créer un Timer via un script. Ajoutez la ligne suivante au tout début de la fonction ``game_over()``:
+
+.. code:: gdscript
+
+    await get_tree().create_timer(3.0).timeout
+
+En gros, la méthode ``get_tree().create_timer(3.0)`` renvoie un Timer qui démarre automatiquement et qui dure 3 secondes (on peut mettre n'importe quelle durée à la place).
+Le mot clé ``await`` précise que l'on doit attendre qu'un signal spécifique soit émit ou qu'une fonction se termine avant de continuer le code.
+Ici, on attend que le Timer créé émette le signal ``timeout`` (c'est-à-dire qu'il s'arrête).
+Le reste du code de la fonction ``game_over()`` sera exécuté après l'émission du signal, c'est-à-dire, après 3 secondes.
+
+Positionnement du Label
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Allez c'est bientôt la fin, on s'était promis qu'on allait le faire, il nous reste plus que ça.
+Il nous faut descendre le ``Label`` lorsque le ``TextureButton`` est appuyé, et le remonter lorsqu'il ne l'est plus.
+
+Pour détecter ces deux événements, connectez les signaux ``button_up`` et ``button_down`` au script de ``Main``, puis écrivez:
+
+.. code:: gdscript
+
+    # Variable utilisée pour prendre moins de place à l'écrit, représente le MarginContainer
+    @onready var margin := $Menu/MarginContainer/VBoxContainer/Control/TextureButton/MarginContainer
+
+    func _on_texture_button_button_down() -> void:
+        margin.set("theme_override_constants/margin_top", 28)
+
+    func _on_texture_button_button_up() -> void:
+        margin.set("theme_override_constants/margin_top", 20)
+
+La méthode ``set`` prend en argument une propriété, et la valeur à mettre à cette propriété. 
+Vous pouvez accéder au chemin complet d'une propriété en faisant **Clic droit -> Copy Property Path** sur la propriété dans L'inspecteur:
+
+.. image:: img/copypropertypath.png
+
+En lançant le jeu, on voit que c'est pas mal, mais si on bouge la souris en restant appuyé, le bouton remonte mais le Label reste en bas:
+
+.. image:: img/playbutton2.gif
+
+Pour régler ça vite fait, vous pouvez activer **Keep Pressed Outside** dans l'Inspecteur du ``TextureButton``:
+
+.. image:: img/keeppressedoutside.png
+
+Fin
+---
+
+Voilà... c'est la fin d'une grande aventure... Vous venez de créer votre premier jeu avec Godot!
+On espère de tout cœur que ça vous aura plu. N'hésitez pas à venir poser des questions sur le serveur discord Arcadia si vous en avez!
+
+**Crédits:**
+
+-   Jules pour le tuto écrit (tout ce que vous venez de lire quoi)
+-   Dimitri pour avoir créé le jeu de base et fait le tuto en atelier
+-   Arcadia, A24
+
+.. image:: img/final.gif
+
+Vous êtes encore là? Bon, vous méritez bien un p'tit cadeau, cliquez sur la partie suivante!
