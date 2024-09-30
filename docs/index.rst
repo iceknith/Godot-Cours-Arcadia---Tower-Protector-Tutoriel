@@ -22,10 +22,7 @@ Contents
    Création du monde <creation-monde>
    Création de la tour <creation-tour>
    Création des ennemis <creation-ennemis>
-<<<<<<< HEAD
-=======
    Création de l'interface <creation-gui>
    Création du menu <creation-menu>
->>>>>>> Iceknith-1.1
 
 Pour démarrer l'aventure, cliques sur le bouton `Suivant` en bas à droite de cette page!
