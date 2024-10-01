@@ -5,12 +5,12 @@
 
 .. note::
 
-   Ce tutoriel est en plein développement. Il ne couvre que jusqu'à la création des ennemis, et peut contenir des erreurs.
-   Si vous en trouvez, n'hésitez pas à avertir les créateurs.
+   Ce tutoriel est destiné à tous les publics, y compris ceux qui n'ont jamais fait de jeux vidéo auparavant.
+   Des connaissances en informatique, un poil de maths et de physiques sont bien sûr les bienvenues, mais pas nécessaires.
+   Si vous avez des difficultés, des remarques, ou d'autres questions, n'hésitez pas à les poser sur le serveur discord d'Arcadia!
 
-Voici un petit sommaire de ce que ce tutoriel propose:
 
-Contents
+Sommaire
 --------
 
 .. toctree::
@@ -24,5 +24,6 @@ Contents
    Création des ennemis <creation-ennemis>
    Création de l'interface <creation-gui>
    Création du menu <creation-menu>
+   Bonus: Petit coup de polish <polish>
 
 Pour démarrer l'aventure, cliques sur le bouton `Suivant` en bas à droite de cette page!

@@ -92,7 +92,11 @@ Pour les fonctions, commençons par le commencement, l'éternelle fonction ``_re
 Ensuite, on veut que dès que l'animation de spawn soit terminée, l'ennemi se dirige vers la tour.
 Pour détecter lorsqu'une animation se termine, il faut utiliser le signal ``animation_finished`` de l'``AnimatedSprite2D``.
 
-Pour cela, allez dans l'onglet **Node**, du côté de l'Inspecteur de l'``AnimatedSprite2D``, et connectez le signal au nœud ``Enemy``.
+Pour cela, allez dans l'onglet **Node**, du côté de l'Inspecteur de l'``AnimatedSprite2D``, et connectez le signal au nœud ``Enemy``,
+en appuyant sur le bouton **Connect** tout en bas ou en faisant **Clic droit -> Connect**. Un popup va apparaître, laissez les paramètres par défaut et cliquez sur **Connect**.
+
+.. image:: img/connectsignal.png
+
 Cela va créer la fonction ``_on_animated_sprite_2d_animation_finished()`` dans le script de l'ennemi.
 Cette fonction sera appelée à chaque fois que l'``AnimatedSprite2D`` termine une animation.
 

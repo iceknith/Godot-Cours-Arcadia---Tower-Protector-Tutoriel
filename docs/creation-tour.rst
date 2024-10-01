@@ -87,6 +87,15 @@ Dans la fonction ``_ready()``, ajoutez:
 Prise de dégâts
 ~~~~~~~~~~~~~~~
 
+Dans cette partie, on va implémenter la prise de dégâts de la tour.
+Pour les futurs scripts, on aura besoin de savoir à quel moment précis la tour se prend des dégâts, et à quel moment elle meurt.
+Dans ce genre de situations, on utilise des signaux.
+
+.. note::
+    Un signal est un message émit par un nœud lorsqu'il se passe quelque chose de spécifique. Il existe des signaux déjà présents pour certains nœuds, mais on peut aussi en créer soi même.
+    Par exemple, lorsqu'un bouton est pressé, il émet le signal ``button_pressed``.
+    On peut connecter un signal pour qu'il appelle une fonction spécifique dans un script.
+
 Pour la prise de dégâts, on va créer 2 signaux:
 
 .. code-block:: gdscript
