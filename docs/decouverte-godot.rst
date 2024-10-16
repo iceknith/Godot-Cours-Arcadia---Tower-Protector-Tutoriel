@@ -7,8 +7,9 @@ Godot, c'est quoi?
 ------------------
 
 Godot Engine (prononcé *Godo* ou *Godote* ou comme vous voulez en fait) est un moteur de jeu open-source et gratuit très facile d'accès.
-Godot permet de développer des jeux 2D et 3D grâce à une interface visuelle intuitive et un langage de script facile à apprendre, le **GDScript**, qui ressemble fortement à Python.
+Godot permet de développer des jeux 2D et 3D grâce à une interface visuelle intuitive et un langage de script facile à apprendre, le `GDScript <https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html>`_, qui ressemble fortement à Python.
 Godot est autant utilisé pour des petits jeux indépendants (comme nous!) que pour des jeux plus complexes (comme nous dans le futur, on l'espère!).
+On peut citer notamment `Dome Keeper <https://godotengine.org/showcase/dome-keeper/>`_ et le prochain `PVKK <https://godotengine.org/showcase/planetenverteidigungskanonenkommandant/>`_ du studio `Bippinbits <https://bippinbits.com/>`_.
 
 Godot fonctionne avec des scènes et des nœuds. On y reviendra un peu plus tard, mais un nœud, c'est un élément de base, qui compose vos scènes.
 Vous pouvez faire interagir vos scènes entre elles (par exemple, mettre la scène *Joueur* dans la scène *Monde*).
@@ -41,13 +42,13 @@ Actuellement, le **Project Manager** est vide, donc créons notre premier projet
    Libre à vous de mettre votre éditeur dans la langue de votre choix, mais il se peut que certains boutons n'aient pas les mêmes libellés chez vous.
    Vous pouvez changer la langue de l'éditeur dans les **Paramètres** en haut à droite du **Project Manager**, ou dans **Editor Settings** dans l'éditeur.
 
-Cliquer sur le bouton **Create** en haut à gauche pour créer un nouveau projet.
-Un popup s’ouvrira, en vous demandant des informations sur votre projet. Nommez votre projet ``"Tuto Arcadia"`` **[1]**, et choisissez le fichier dans lequel vous voulez qu’il soit stocké **[2]**.
+Cliquez sur le bouton **Create** en haut à gauche pour créer un nouveau projet.
+Un popup s’ouvrira, en vous demandant des informations sur votre projet. Nommez votre projet ``"Tuto Arcadia"`` **[1]**, et choisissez le dossier dans lequel vous voulez qu’il soit stocké **[2]**.
 
 .. image:: img/newproject.png
 
 Laissez les autres paramètres comme ils sont pour l'instant, et créez votre projet. Une nouvelle fenêtre devrait se lancer.
-C'est la fenêtre principale de Godot, l'éditeur, celle où vous aller tout faire sur vos jeux.
+C'est la fenêtre principale de Godot, l'éditeur, celle où vous allez tout faire sur vos jeux.
 
 L'éditeur
 ---------
@@ -60,7 +61,7 @@ Dans cette sous-partie, nous allons décrire les différents éléments qui comp
 
 2. En bas à gauche, vous trouverez l'**Arborescence du projet**.
    Il s'agit en réalité du dossier que vous venez de créer en créant le projet.
-   Vous pouvez le retrouver sur votre ordinateur en suivant le chemin de votre projet (que vous avez rempli plus tôt).
+   Vous pouvez le retrouver sur votre ordinateur en suivant le chemin de votre projet (que vous avez rempli plus tôt) ou en faisant **Clic-droit -> Open in File Manager**.
 
 3. Juste au dessus, en haut à gauche, on trouve l'**Arborescence des scènes**. C'est là que vous pourrez modifier la **scène** en cours.
    Chaque partie du jeu (le joueur, les ennemis, le monde) est une scène.

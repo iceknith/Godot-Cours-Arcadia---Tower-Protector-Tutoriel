@@ -14,7 +14,7 @@ En prenant par exemple le joueur:
 
 .. image:: img/rendercomparison.png
 
-Pour régler ça, en sélectionnant le nœud ``Player`` de la scène du joueur, changez le **Texture Filter** dans l'Inspecteur en **Neareset**:
+Pour régler ça, en sélectionnant le nœud ``Player`` de la scène du joueur, changez le **Texture Filter** dans l'Inspecteur en **Nearest**:
 
 .. image:: img/texturefilternearest.png
 

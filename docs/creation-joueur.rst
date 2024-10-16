@@ -32,7 +32,7 @@ Le nœud ``CollisionShape2D`` est utilisé pour ajouter des hitbox (boîtes de c
 Après avoir ajouté la CollisionShape2D, vous devriez avoir un autre warning disant que celle-ci n'a pas de forme.
 
 Pour ajouter une shape, cliquez sur le nœud CollisionShape2D. Vous verrez alors que l'inspecteur, à droite de l'écran, affiche des informations sur la CollisionShape2D.
-Ajoutez une ``CapsuleShape2D`` dans l'attribut ``shape``, qui est normalement vide. Vous devriez voir un espèce de Tic Tac™ bleu au milieu de votre écran, c'est la shape que vous venez d'ajouter:
+Ajoutez une ``CapsuleShape2D`` dans l'attribut ``shape``, qui est normalement vide. Vous devriez voir une espèce de Tic Tac™ bleu au milieu de votre écran, c'est la shape que vous venez d'ajouter:
 
 .. image:: img/collisionshape.png
 
@@ -110,7 +110,7 @@ en sélectionnant les 6 frames suivantes (toute la deuxième ligne).
 
 Pour plus de fluidité, vous pouvez mettre les deux animations à **8 FPS** (ou ajuster la vitesse à votre préférence).
 
-Et finalement, vous pouvez ajuster la hitbox crée :ref:`précédemment <init-joueur>` à notre sprite.
+Et finalement, vous pouvez ajuster la hitbox créée :ref:`précédemment <init-joueur>` à notre sprite.
 
 .. tip::
    Pour ajuster la taille de la collision plus facilement, vous pouvez glisser la ``CollisionShape2D`` en dessous de l'``AnimatedSprite2D`` dans la scène.
@@ -252,9 +252,9 @@ Pour celà, nous pouvons utiliser le code suivant:
 
 .. code-block:: GDScript
 
-   func _physics_process(delta):
-       var directionX:int = Input.get_axis("ui_left", "ui_right")
-       velocity.x = directionX * 300
+   func _physics_process(delta: float) -> void:
+       var directionX:float = Input.get_axis("ui_left", "ui_right")
+       velocity.x = directionX * 300.0
        move_and_slide()
 
 Ce code est dans la fonction ``_physics_process`` et s'exécutera donc à chaque update du moteur physique.
@@ -267,28 +267,28 @@ sinon, elle renverra 0 (si vous jouez au joystick, vous pourrez avoir toutes les
 
 Ensuite, après avoir récupéré la direction du joueur sur l'axe X,
 nous allons pouvoir changer la vélocité du joueur sur l'axe X,
-en multipliant la direction par `300`, `300` étant la vitesse que l'on donnera à notre joueur.
+en multipliant la direction par `300.0`, `300.0` étant la vitesse que l'on donnera à notre joueur.
 
 Finalement, nous travaillons avec un ``CharacterBody2D``, et donc nous avons accès à la fonction ``move_and_slide()``,
 qui va automatiquement faire bouger le joueur, et gérer ses collisions.
 
 Pour tester ce code, vous pouvez appuyer sur ``F6`` (ou sur ``fn+F6``) pour faire tourner la scène actuelle.
 
-.. hint:: Exercice:
+.. hint:: Exercice: Faire bouger le joueur verticalement
    Maintenant que vous savez faire bouger le joueur sur l'axe X, essayez (sans regarder la suite) de le faire bouger
    sur l'axe Y.
    Indice: les inputs pour le haut et le bas sont respectivement ``"ui_up"`` et ``"ui_down"``
 
 
-Une fois que nous avons fait les mouvements sur une axe, il est simple de les transposer sur l'autre axe:
+Une fois que nous avons fait les mouvements sur un axe, il est simple de les transposer sur l'autre axe:
 
 .. code-block:: gdscript
 
-   func _physics_process(delta):
-       var directionX:int = Input.get_axis("ui_left", "ui_right")
-       var directionY:int = Input.get_axis("ui_up", "ui_down")
-       velocity.x = directionX * 300
-       velocity.y = directionY * 300
+   func _physics_process(delta: float) -> void:
+       var directionX:float = Input.get_axis("ui_left", "ui_right")
+       var directionY:float = Input.get_axis("ui_up", "ui_down")
+       velocity.x = directionX * 300.0
+       velocity.y = directionY * 300.0
        move_and_slide()
 
 Mais pour simplifier notre code, nous n'allons pas utiliser une autre variable pour l'axe Y.
@@ -298,9 +298,9 @@ Voici le nouveau code, pour un mouvement dans les deux axes:
 
 .. code-block:: gdscript
 
-   @export var speed:float = 300
+   @export var speed:float = 300.0
 
-   func _physics_process(delta):
+   func _physics_process(delta: float) -> void:
        var direction:Vector2 = Vector2(Input.get_axis("ui_left", "ui_right"), Input.get_axis("ui_up", "ui_down"))
        velocity = direction * speed
        move_and_slide()
@@ -365,7 +365,7 @@ Mais qu'on aille à droite ou à gauche, le sprite, lui, est toujours tourné ve
 
 Nous allons donc tourner le sprite du joueur, selon la direction dans laquelle le joueur va.
 
-.. hint:: Exercice:
+.. hint:: Exercice: Faire tourner le joueur selon sa direction
    Tourner le joueur selon là où il va est similaire à changer son animation selon si il court.
    Essayez donc d'implémenter cette fonctionalité tout seul, sans regarder la solution.
    Indice: Par défaut, ``$AnimatedSprite2D.flip_h = false``, et il faut mettre cette variable
@@ -395,7 +395,7 @@ mais qui est assez rudimentaire, nous allons donc l'améliorer!
 Ajustement des mouvements en diagonales
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Le premier problème, c'est que notre joueur se déplace plus vite quand il va en diagonale, que lorsqu'il va en ligne doite:
+Le premier problème, c'est que notre joueur se déplace plus vite quand il va en diagonale, que lorsqu'il va en ligne droite:
 
 .. image:: img/movementnorm.png
 

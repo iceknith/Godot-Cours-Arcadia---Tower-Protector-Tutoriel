@@ -5,7 +5,7 @@
 
 .. note::
 
-   Ce tutoriel est destiné à tous les publics, y compris ceux qui n'ont jamais fait de jeux vidéo auparavant.
+   Ce tutoriel est destiné à tous les publics, y compris celles et ceux qui n'ont jamais fait de jeux vidéo auparavant.
    Des connaissances en informatique, un poil de maths et de physiques sont bien sûr les bienvenues, mais pas nécessaires.
    Si vous avez des difficultés, des remarques, ou d'autres questions, n'hésitez pas à les poser sur le serveur discord d'Arcadia!
 
